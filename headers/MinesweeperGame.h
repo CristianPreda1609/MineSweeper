@@ -136,8 +136,8 @@ public:
             for(c = 1; c < col + 2; ++c) {
                 nearbyMines = 0;
 
-                int dr[] = {-1, -1, -1, 0, 0, 1, 1, 1};
-                int dc[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+                const int dr[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+                const int dc[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
                 for (int dir = 0; dir < 8; ++dir) {
 

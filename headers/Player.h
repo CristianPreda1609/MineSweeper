@@ -14,7 +14,7 @@ private:
     int wins;
 
 public:
-    Player(const std::string& name_new)
+   explicit Player(const std::string& name_new)
             : name(name_new), score(0), wins(0) {}
 
     friend std::ostream& operator<<(std::ostream& os, const Player& player) {

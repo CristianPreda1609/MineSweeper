@@ -47,7 +47,7 @@ public:
     void setMine(){
         isMine = true;
     }
-    void setNrMines( int& _nr){
+    void setNrMines(const int& _nr){
         nr_mine = _nr;
     }
     [[nodiscard]] bool Press() const{

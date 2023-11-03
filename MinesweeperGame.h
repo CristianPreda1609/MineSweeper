@@ -9,7 +9,7 @@
 #include <vector>
 #include "Cell.h"
 #include <random>
-#include <rlutil.h>
+#include "rlutil.h"
 
 
 class MinesweeperGame {

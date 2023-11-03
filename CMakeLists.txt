@@ -109,9 +109,6 @@ endif()
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${PROJECT_NAME} main.cpp
-        headers/MinesweeperGame.h
-        headers/Player.h
-        headers/Cell.h
         Cell.cpp
         Cell.h
         MinesweeperGame.cpp

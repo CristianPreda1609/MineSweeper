@@ -4,7 +4,7 @@
 #include <chrono>
 #include <thread>
 #include "MinesweeperGame.h"
-#include "rlutil.h"
+#include <rlutil.h>
 
 #ifdef __linux__
 #include <X11/Xlib.h>

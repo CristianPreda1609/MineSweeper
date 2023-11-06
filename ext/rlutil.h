@@ -51,11 +51,11 @@ namespace rlutil {
 }
 #else
 #define _POSIX_C_SOURCE 199309L
-#include <time.h>  // for nanosleep
-#include <stdio.h> // for getch() / printf()
-#include <stdlib.h> // for getenv()
-#include <string.h> // for strlen()
-RLUTIL_INLINE void locate(int x, int y); // Forward declare for C to avoid warnings
+	#include <time.h>  // for nanosleep
+	#include <stdio.h> // for getch() / printf()
+	#include <stdlib.h> // for getenv()
+	#include <string.h> // for strlen()
+	RLUTIL_INLINE void locate(int x, int y); // Forward declare for C to avoid warnings
 #endif // __cplusplus
 
 RLUTIL_INLINE int runs_on_ci() {
@@ -74,9 +74,8 @@ RLUTIL_INLINE int runs_on_ci() {
 #endif
 #ifndef NOMINMAX
 #define NOMINMAX  1
-#define LOCAL_NOMINMAX 1
+		#define LOCAL_NOMINMAX 1
 #endif
-
 #include <windows.h>  // for WinAPI and Sleep()
 // cleanup
 #ifdef LOCAL_WIN32_LEAN_AND_MEAN
@@ -87,62 +86,60 @@ RLUTIL_INLINE int runs_on_ci() {
 #endif
 
 #define _NO_OLDNAMES  // for MinGW compatibility
-
 #include <conio.h>    // for getch() and kbhit()
-
 #define getch _getch
 #define kbhit _kbhit
 #else
 #include <termios.h> // for getch() and kbhit()
-#include <unistd.h> // for getch(), kbhit() and (u)sleep()
-#include <sys/ioctl.h> // for getkey()
-#include <sys/types.h> // for kbhit()
-#include <sys/time.h> // for kbhit()
+	#include <unistd.h> // for getch(), kbhit() and (u)sleep()
+	#include <sys/ioctl.h> // for getkey()
+	#include <sys/types.h> // for kbhit()
+	#include <sys/time.h> // for kbhit()
 
 /// Function: getch
 /// Get character without waiting for Return to be pressed.
 /// Windows has this in conio.h
 RLUTIL_INLINE int getch(void) {
-    if(runs_on_ci())
-        return getchar();
+	if(runs_on_ci())
+		return getchar();
 
-    // Here be magic.
-    struct termios oldt, newt;
-    int ch;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    return ch;
+	// Here be magic.
+	struct termios oldt, newt;
+	int ch;
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	ch = getchar();
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	return ch;
 }
 
 /// Function: kbhit
 /// Determines if keyboard has been hit.
 /// Windows has this in conio.h
 RLUTIL_INLINE int kbhit(void) {
-    if(runs_on_ci())
-        return 1;
+	if(runs_on_ci())
+		return 1;
 
-    // Here be dragons.
-    static struct termios oldt, newt;
-    int cnt = 0;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag    &= ~(ICANON | ECHO);
-    newt.c_iflag     = 0; // input mode
-    newt.c_oflag     = 0; // output mode
-    newt.c_cc[VMIN]  = 1; // minimum time to wait
-    newt.c_cc[VTIME] = 1; // minimum characters to wait for
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ioctl(0, FIONREAD, &cnt); // Read count
-    struct timeval tv;
-    tv.tv_sec  = 0;
-    tv.tv_usec = 100;
-    select(STDIN_FILENO+1, NULL, NULL, NULL, &tv); // A small time delay
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    return cnt; // Return number of characters
+	// Here be dragons.
+	static struct termios oldt, newt;
+	int cnt = 0;
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag    &= ~(ICANON | ECHO);
+	newt.c_iflag     = 0; // input mode
+	newt.c_oflag     = 0; // output mode
+	newt.c_cc[VMIN]  = 1; // minimum time to wait
+	newt.c_cc[VTIME] = 1; // minimum characters to wait for
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	ioctl(0, FIONREAD, &cnt); // Read count
+	struct timeval tv;
+	tv.tv_sec  = 0;
+	tv.tv_usec = 100;
+	select(STDIN_FILENO+1, NULL, NULL, NULL, &tv); // A small time delay
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	return cnt; // Return number of characters
 }
 #endif // _WIN32
 
@@ -155,7 +152,6 @@ RLUTIL_INLINE void gotoxy(int x, int y) {
 #endif
     locate(x, y);
 }
-
 #endif // gotoxy
 
 #ifdef __cplusplus
@@ -453,17 +449,17 @@ namespace rlutil {
                 return KEY_ESCAPE;
 #else // _WIN32
                 case 155: // single-character CSI
-                case 27: {
-                    // Process ANSI escape sequences
-                    if (cnt >= 3 && getch() == '[') {
-                        switch (k = getch()) {
-                            case 'A': return KEY_UP;
-                            case 'B': return KEY_DOWN;
-                            case 'C': return KEY_RIGHT;
-                            case 'D': return KEY_LEFT;
-                        }
-                    } else return KEY_ESCAPE;
-                }
+		case 27: {
+			// Process ANSI escape sequences
+			if (cnt >= 3 && getch() == '[') {
+				switch (k = getch()) {
+					case 'A': return KEY_UP;
+					case 'B': return KEY_DOWN;
+					case 'C': return KEY_RIGHT;
+					case 'D': return KEY_LEFT;
+				}
+			} else return KEY_ESCAPE;
+		}
 #endif // _WIN32
             default:
                 return k;
@@ -646,7 +642,7 @@ namespace rlutil {
         SetConsoleCursorPosition(hConsole, coordScreen);
 #else
         RLUTIL_PRINT(ANSI_CLS);
-        RLUTIL_PRINT(ANSI_CURSOR_HOME);
+	RLUTIL_PRINT(ANSI_CURSOR_HOME);
 #endif
     }
 
@@ -679,7 +675,7 @@ namespace rlutil {
         unsigned int len = str_.size();
 #else // __cplusplus
         RLUTIL_INLINE void setString(RLUTIL_STRING_T str) {
-            unsigned int len = strlen(str);
+	unsigned int len = strlen(str);
 #endif // __cplusplus
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
         HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -690,13 +686,13 @@ namespace rlutil {
         WriteConsoleOutputCharacterA(hConsoleOutput, str, len, csbi.dwCursorPosition, &numberOfCharsWritten);
 #else // _WIN32 || USE_ANSI
         RLUTIL_PRINT(str);
-#ifdef __cplusplus
-            RLUTIL_PRINT("\033[" << len << 'D');
-#else // __cplusplus
-            char buf[3 + 20 + 1]; // 20 = max length of 64-bit unsigned int when printed as dec
-            sprintf(buf, "\033[%uD", len);
-            RLUTIL_PRINT(buf);
-#endif // __cplusplus
+	#ifdef __cplusplus
+		RLUTIL_PRINT("\033[" << len << 'D');
+	#else // __cplusplus
+		char buf[3 + 20 + 1]; // 20 = max length of 64-bit unsigned int when printed as dec
+		sprintf(buf, "\033[%uD", len);
+		RLUTIL_PRINT(buf);
+	#endif // __cplusplus
 #endif // _WIN32 || USE_ANSI
     }
 
@@ -740,15 +736,15 @@ namespace rlutil {
         Sleep(ms);
 #else
         // https://stackoverflow.com/a/55860234
-        struct timespec ts;
-        ts.tv_sec = ms / 1000000000ul;               // whole seconds
-        ts.tv_nsec = (ms % 1000000000ul) * 1000000;  // remainder, in nanoseconds
-        nanosleep(&ts, NULL);
+	struct timespec ts;
+	ts.tv_sec = ms / 1000000000ul;               // whole seconds
+	ts.tv_nsec = (ms % 1000000000ul) * 1000000;  // remainder, in nanoseconds
+	nanosleep(&ts, NULL);
 
-        // usleep gives warnings in C code; seems to be deprecated/legacy
-        // usleep argument must be under 1 000 000
-        // if (ms > 1000) sleep(ms/1000000);
-        // usleep((ms % 1000000) * 1000);
+	// usleep gives warnings in C code; seems to be deprecated/legacy
+	// usleep argument must be under 1 000 000
+	// if (ms > 1000) sleep(ms/1000000);
+	// usleep((ms % 1000000) * 1000);
 #endif
     }
 
@@ -811,7 +807,6 @@ namespace rlutil {
 /// the message to be displayed, or NULL
 /// for no message.
 #ifdef __cplusplus
-
     RLUTIL_INLINE void anykey() {
         getch();
     }
@@ -821,8 +816,8 @@ namespace rlutil {
         RLUTIL_PRINT(msg);
 #else
         RLUTIL_INLINE void anykey(RLUTIL_STRING_T msg) {
-            if (msg)
-                RLUTIL_PRINT(msg);
+	if (msg)
+		RLUTIL_PRINT(msg);
 #endif // __cplusplus
         getch();
     }
@@ -835,19 +830,16 @@ namespace rlutil {
         RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T title) {
             const char *true_title = title;
 #endif // __cplusplus
-#if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
+#if defined(_
 
-
-   SetConsoleTitleA(true_title);
+IN32) && !defined(RLUTIL_USE_ANSI)
+            SetConsoleTitleA(true_title);
 #else
             RLUTIL_PRINT(ANSI_CONSOLE_TITLE_PRE);
-            RLUTIL_PRINT(true_title);
-            RLUTIL_P
-    INT(ANSI_CONSOLE_TIT
-        _POST);
-#endif // defined(_WIN3
+	RLUTIL_PRINT(true_title);
+	RLUTIL_PRINT(ANSI_CONSOLE_TITLE_POST);
+#endif // de
 
-         && !defined(RLUTIL_USE_ANSI)
-
-         }// namespace rlutil
+        N32) && !defined(RLUTIL_USE_ANSI)
+        }// namespace rlutil
 #endif

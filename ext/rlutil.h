@@ -150,7 +150,7 @@ RLUTIL_INLINE void gotoxy(int x, int y) {
 #ifdef __cplusplus
     rlutil::
 #endif
-    locate(x, y);
+    locate(x,y);
 }
 #endif // gotoxy
 
@@ -175,11 +175,11 @@ namespace rlutil {
 
 #define RLUTIL_PRINT(st) do { std::cout << st; } while(false)
 #else // __cplusplus
-#ifndef RLUTIL_STRING_T
-    typedef const char* RLUTIL_STRING_T;
-#endif // RLUTIL_STRING_T
+    #ifndef RLUTIL_STRING_T
+		typedef const char* RLUTIL_STRING_T;
+	#endif // RLUTIL_STRING_T
 
-#define RLUTIL_PRINT(st) printf("%s", st)
+	#define RLUTIL_PRINT(st) printf("%s", st)
 #endif // __cplusplus
 
 /**
@@ -256,37 +256,37 @@ namespace rlutil {
  * ANSI_BACKGROUND_CYAN    - Cyan background
  * ANSI_BACKGROUND_WHITE   - White background
  */
-    const RLUTIL_STRING_T ANSI_CLS = "\033[2J\033[3J";
-    const RLUTIL_STRING_T ANSI_CONSOLE_TITLE_PRE = "\033]0;";
+    const RLUTIL_STRING_T ANSI_CLS                = "\033[2J\033[3J";
+    const RLUTIL_STRING_T ANSI_CONSOLE_TITLE_PRE  = "\033]0;";
     const RLUTIL_STRING_T ANSI_CONSOLE_TITLE_POST = "\007";
-    const RLUTIL_STRING_T ANSI_ATTRIBUTE_RESET = "\033[0m";
-    const RLUTIL_STRING_T ANSI_CURSOR_HIDE = "\033[?25l";
-    const RLUTIL_STRING_T ANSI_CURSOR_SHOW = "\033[?25h";
-    const RLUTIL_STRING_T ANSI_CURSOR_HOME = "\033[H";
-    const RLUTIL_STRING_T ANSI_BLACK = "\033[22;30m";
-    const RLUTIL_STRING_T ANSI_RED = "\033[22;31m";
-    const RLUTIL_STRING_T ANSI_GREEN = "\033[22;32m";
-    const RLUTIL_STRING_T ANSI_BROWN = "\033[22;33m";
-    const RLUTIL_STRING_T ANSI_BLUE = "\033[22;34m";
-    const RLUTIL_STRING_T ANSI_MAGENTA = "\033[22;35m";
-    const RLUTIL_STRING_T ANSI_CYAN = "\033[22;36m";
-    const RLUTIL_STRING_T ANSI_GREY = "\033[22;37m";
-    const RLUTIL_STRING_T ANSI_DARKGREY = "\033[01;30m";
-    const RLUTIL_STRING_T ANSI_LIGHTRED = "\033[01;31m";
-    const RLUTIL_STRING_T ANSI_LIGHTGREEN = "\033[01;32m";
-    const RLUTIL_STRING_T ANSI_YELLOW = "\033[01;33m";
-    const RLUTIL_STRING_T ANSI_LIGHTBLUE = "\033[01;34m";
-    const RLUTIL_STRING_T ANSI_LIGHTMAGENTA = "\033[01;35m";
-    const RLUTIL_STRING_T ANSI_LIGHTCYAN = "\033[01;36m";
-    const RLUTIL_STRING_T ANSI_WHITE = "\033[01;37m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_BLACK = "\033[40m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_RED = "\033[41m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_GREEN = "\033[42m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_YELLOW = "\033[43m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_BLUE = "\033[44m";
+    const RLUTIL_STRING_T ANSI_ATTRIBUTE_RESET    = "\033[0m";
+    const RLUTIL_STRING_T ANSI_CURSOR_HIDE        = "\033[?25l";
+    const RLUTIL_STRING_T ANSI_CURSOR_SHOW        = "\033[?25h";
+    const RLUTIL_STRING_T ANSI_CURSOR_HOME        = "\033[H";
+    const RLUTIL_STRING_T ANSI_BLACK              = "\033[22;30m";
+    const RLUTIL_STRING_T ANSI_RED                = "\033[22;31m";
+    const RLUTIL_STRING_T ANSI_GREEN              = "\033[22;32m";
+    const RLUTIL_STRING_T ANSI_BROWN              = "\033[22;33m";
+    const RLUTIL_STRING_T ANSI_BLUE               = "\033[22;34m";
+    const RLUTIL_STRING_T ANSI_MAGENTA            = "\033[22;35m";
+    const RLUTIL_STRING_T ANSI_CYAN               = "\033[22;36m";
+    const RLUTIL_STRING_T ANSI_GREY               = "\033[22;37m";
+    const RLUTIL_STRING_T ANSI_DARKGREY           = "\033[01;30m";
+    const RLUTIL_STRING_T ANSI_LIGHTRED           = "\033[01;31m";
+    const RLUTIL_STRING_T ANSI_LIGHTGREEN         = "\033[01;32m";
+    const RLUTIL_STRING_T ANSI_YELLOW             = "\033[01;33m";
+    const RLUTIL_STRING_T ANSI_LIGHTBLUE          = "\033[01;34m";
+    const RLUTIL_STRING_T ANSI_LIGHTMAGENTA       = "\033[01;35m";
+    const RLUTIL_STRING_T ANSI_LIGHTCYAN          = "\033[01;36m";
+    const RLUTIL_STRING_T ANSI_WHITE              = "\033[01;37m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_BLACK   = "\033[40m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_RED     = "\033[41m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_GREEN   = "\033[42m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_YELLOW  = "\033[43m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_BLUE    = "\033[44m";
     const RLUTIL_STRING_T ANSI_BACKGROUND_MAGENTA = "\033[45m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_CYAN = "\033[46m";
-    const RLUTIL_STRING_T ANSI_BACKGROUND_WHITE = "\033[47m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_CYAN    = "\033[46m";
+    const RLUTIL_STRING_T ANSI_BACKGROUND_WHITE   = "\033[47m";
 // Remaining colors not supported as background colors
 
 /**
@@ -330,36 +330,36 @@ namespace rlutil {
  * KEY_NUMPAD9 - Numpad 9
  */
     enum {
-        KEY_ESCAPE = 0,
-        KEY_ENTER = 1,
-        KEY_SPACE = 32,
+        KEY_ESCAPE  = 0,
+        KEY_ENTER   = 1,
+        KEY_SPACE   = 32,
 
-        KEY_INSERT = 2,
-        KEY_HOME = 3,
-        KEY_PGUP = 4,
-        KEY_DELETE = 5,
-        KEY_END = 6,
-        KEY_PGDOWN = 7,
+        KEY_INSERT  = 2,
+        KEY_HOME    = 3,
+        KEY_PGUP    = 4,
+        KEY_DELETE  = 5,
+        KEY_END     = 6,
+        KEY_PGDOWN  = 7,
 
-        KEY_UP = 14,
-        KEY_DOWN = 15,
-        KEY_LEFT = 16,
-        KEY_RIGHT = 17,
+        KEY_UP      = 14,
+        KEY_DOWN    = 15,
+        KEY_LEFT    = 16,
+        KEY_RIGHT   = 17,
 
-        KEY_F1 = 18,
-        KEY_F2 = 19,
-        KEY_F3 = 20,
-        KEY_F4 = 21,
-        KEY_F5 = 22,
-        KEY_F6 = 23,
-        KEY_F7 = 24,
-        KEY_F8 = 25,
-        KEY_F9 = 26,
-        KEY_F10 = 27,
-        KEY_F11 = 28,
-        KEY_F12 = 29,
+        KEY_F1      = 18,
+        KEY_F2      = 19,
+        KEY_F3      = 20,
+        KEY_F4      = 21,
+        KEY_F5      = 22,
+        KEY_F6      = 23,
+        KEY_F7      = 24,
+        KEY_F8      = 25,
+        KEY_F9      = 26,
+        KEY_F10     = 27,
+        KEY_F11     = 28,
+        KEY_F12     = 29,
 
-        KEY_NUMDEL = 30,
+        KEY_NUMDEL  = 30,
         KEY_NUMPAD0 = 31,
         KEY_NUMPAD1 = 127,
         KEY_NUMPAD2 = 128,
@@ -380,73 +380,47 @@ namespace rlutil {
 /// Note:
 /// Only Arrows, Esc, Enter and Space are currently working properly.
     RLUTIL_INLINE int getkey(void) {
-        if (runs_on_ci())
+        if(runs_on_ci())
             return getchar();
 
 #ifndef _WIN32
         int cnt = kbhit(); // for ANSI escapes processing
 #endif
         int k = getch();
-        switch (k) {
+        switch(k) {
             case 0: {
                 int kk;
                 switch (kk = getch()) {
-                    case 71:
-                        return KEY_NUMPAD7;
-                    case 72:
-                        return KEY_NUMPAD8;
-                    case 73:
-                        return KEY_NUMPAD9;
-                    case 75:
-                        return KEY_NUMPAD4;
-                    case 77:
-                        return KEY_NUMPAD6;
-                    case 79:
-                        return KEY_NUMPAD1;
-                    case 80:
-                        return KEY_NUMPAD2;
-                    case 81:
-                        return KEY_NUMPAD3;
-                    case 82:
-                        return KEY_NUMPAD0;
-                    case 83:
-                        return KEY_NUMDEL;
-                    default:
-                        return kk - 59 + KEY_F1; // Function keys
-                }
-            }
+                    case 71: return KEY_NUMPAD7;
+                    case 72: return KEY_NUMPAD8;
+                    case 73: return KEY_NUMPAD9;
+                    case 75: return KEY_NUMPAD4;
+                    case 77: return KEY_NUMPAD6;
+                    case 79: return KEY_NUMPAD1;
+                    case 80: return KEY_NUMPAD2;
+                    case 81: return KEY_NUMPAD3;
+                    case 82: return KEY_NUMPAD0;
+                    case 83: return KEY_NUMDEL;
+                    default: return kk-59+KEY_F1; // Function keys
+                }}
             case 224: {
                 int kk;
                 switch (kk = getch()) {
-                    case 71:
-                        return KEY_HOME;
-                    case 72:
-                        return KEY_UP;
-                    case 73:
-                        return KEY_PGUP;
-                    case 75:
-                        return KEY_LEFT;
-                    case 77:
-                        return KEY_RIGHT;
-                    case 79:
-                        return KEY_END;
-                    case 80:
-                        return KEY_DOWN;
-                    case 81:
-                        return KEY_PGDOWN;
-                    case 82:
-                        return KEY_INSERT;
-                    case 83:
-                        return KEY_DELETE;
-                    default:
-                        return kk - 123 + KEY_F1; // Function keys
-                }
-            }
-            case 13:
-                return KEY_ENTER;
+                    case 71: return KEY_HOME;
+                    case 72: return KEY_UP;
+                    case 73: return KEY_PGUP;
+                    case 75: return KEY_LEFT;
+                    case 77: return KEY_RIGHT;
+                    case 79: return KEY_END;
+                    case 80: return KEY_DOWN;
+                    case 81: return KEY_PGDOWN;
+                    case 82: return KEY_INSERT;
+                    case 83: return KEY_DELETE;
+                    default: return kk-123+KEY_F1; // Function keys
+                }}
+            case 13: return KEY_ENTER;
 #ifdef _WIN32
-            case 27:
-                return KEY_ESCAPE;
+            case 27: return KEY_ESCAPE;
 #else // _WIN32
                 case 155: // single-character CSI
 		case 27: {
@@ -461,8 +435,7 @@ namespace rlutil {
 			} else return KEY_ESCAPE;
 		}
 #endif // _WIN32
-            default:
-                return k;
+            default: return k;
         }
     }
 
@@ -479,40 +452,23 @@ namespace rlutil {
 /// See <Color Codes>
     RLUTIL_INLINE RLUTIL_STRING_T getANSIColor(const int c) {
         switch (c) {
-            case BLACK       :
-                return ANSI_BLACK;
-            case BLUE        :
-                return ANSI_BLUE; // non-ANSI
-            case GREEN       :
-                return ANSI_GREEN;
-            case CYAN        :
-                return ANSI_CYAN; // non-ANSI
-            case RED         :
-                return ANSI_RED; // non-ANSI
-            case MAGENTA     :
-                return ANSI_MAGENTA;
-            case BROWN       :
-                return ANSI_BROWN;
-            case GREY        :
-                return ANSI_GREY;
-            case DARKGREY    :
-                return ANSI_DARKGREY;
-            case LIGHTBLUE   :
-                return ANSI_LIGHTBLUE; // non-ANSI
-            case LIGHTGREEN  :
-                return ANSI_LIGHTGREEN;
-            case LIGHTCYAN   :
-                return ANSI_LIGHTCYAN; // non-ANSI;
-            case LIGHTRED    :
-                return ANSI_LIGHTRED; // non-ANSI;
-            case LIGHTMAGENTA:
-                return ANSI_LIGHTMAGENTA;
-            case YELLOW      :
-                return ANSI_YELLOW; // non-ANSI
-            case WHITE       :
-                return ANSI_WHITE;
-            default:
-                return "";
+            case BLACK       : return ANSI_BLACK;
+            case BLUE        : return ANSI_BLUE; // non-ANSI
+            case GREEN       : return ANSI_GREEN;
+            case CYAN        : return ANSI_CYAN; // non-ANSI
+            case RED         : return ANSI_RED; // non-ANSI
+            case MAGENTA     : return ANSI_MAGENTA;
+            case BROWN       : return ANSI_BROWN;
+            case GREY        : return ANSI_GREY;
+            case DARKGREY    : return ANSI_DARKGREY;
+            case LIGHTBLUE   : return ANSI_LIGHTBLUE; // non-ANSI
+            case LIGHTGREEN  : return ANSI_LIGHTGREEN;
+            case LIGHTCYAN   : return ANSI_LIGHTCYAN; // non-ANSI;
+            case LIGHTRED    : return ANSI_LIGHTRED; // non-ANSI;
+            case LIGHTMAGENTA: return ANSI_LIGHTMAGENTA;
+            case YELLOW      : return ANSI_YELLOW; // non-ANSI
+            case WHITE       : return ANSI_WHITE;
+            default: return "";
         }
     }
 
@@ -522,24 +478,15 @@ namespace rlutil {
 /// See <Color Codes>
     RLUTIL_INLINE RLUTIL_STRING_T getANSIBackgroundColor(const int c) {
         switch (c) {
-            case BLACK  :
-                return ANSI_BACKGROUND_BLACK;
-            case BLUE   :
-                return ANSI_BACKGROUND_BLUE;
-            case GREEN  :
-                return ANSI_BACKGROUND_GREEN;
-            case CYAN   :
-                return ANSI_BACKGROUND_CYAN;
-            case RED    :
-                return ANSI_BACKGROUND_RED;
-            case MAGENTA:
-                return ANSI_BACKGROUND_MAGENTA;
-            case BROWN  :
-                return ANSI_BACKGROUND_YELLOW;
-            case GREY   :
-                return ANSI_BACKGROUND_WHITE;
-            default:
-                return "";
+            case BLACK  : return ANSI_BACKGROUND_BLACK;
+            case BLUE   : return ANSI_BACKGROUND_BLUE;
+            case GREEN  : return ANSI_BACKGROUND_GREEN;
+            case CYAN   : return ANSI_BACKGROUND_CYAN;
+            case RED    : return ANSI_BACKGROUND_RED;
+            case MAGENTA: return ANSI_BACKGROUND_MAGENTA;
+            case BROWN  : return ANSI_BACKGROUND_YELLOW;
+            case GREY   : return ANSI_BACKGROUND_WHITE;
+            default: return "";
         }
     }
 
@@ -555,8 +502,7 @@ namespace rlutil {
 
         GetConsoleScreenBufferInfo(hConsole, &csbi);
 
-        SetConsoleTextAttribute(hConsole, (csbi.wAttributes & 0xFFF0) |
-                                          (WORD) c); // Foreground colors take up the least significant byte
+        SetConsoleTextAttribute(hConsole, (csbi.wAttributes & 0xFFF0) | (WORD)c); // Foreground colors take up the least significant byte
 #else
         RLUTIL_PRINT(getANSIColor(c));
 #endif
@@ -574,8 +520,7 @@ namespace rlutil {
 
         GetConsoleScreenBufferInfo(hConsole, &csbi);
 
-        SetConsoleTextAttribute(hConsole, (csbi.wAttributes & 0xFF0F) | (((WORD) c)
-                << 4)); // Background colors take up the second-least significant byte
+        SetConsoleTextAttribute(hConsole, (csbi.wAttributes & 0xFF0F) | (((WORD)c) << 4)); // Background colors take up the second-least significant byte
 #else
         RLUTIL_PRINT(getANSIBackgroundColor(c));
 #endif
@@ -598,7 +543,7 @@ namespace rlutil {
             attributes = csbi.wAttributes;
             initialized = 1;
         }
-        return (int) attributes;
+        return (int)attributes;
 #else
         return -1;
 #endif
@@ -613,7 +558,7 @@ namespace rlutil {
 /// See <saveDefaultColor>
     RLUTIL_INLINE void resetColor(void) {
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (WORD) saveDefaultColor());
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (WORD)saveDefaultColor());
 #else
         RLUTIL_PRINT(ANSI_ATTRIBUTE_RESET);
 #endif
@@ -622,7 +567,7 @@ namespace rlutil {
 /// Function: cls
 /// Clears screen, resets all attributes and moves cursor home.
     RLUTIL_INLINE void cls(void) {
-        if (runs_on_ci())
+        if(runs_on_ci())
             return;
 
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
@@ -634,7 +579,7 @@ namespace rlutil {
 
         GetConsoleScreenBufferInfo(hConsole, &csbi);
         const DWORD dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-        FillConsoleOutputCharacter(hConsole, (TCHAR) ' ', dwConSize, coordScreen, &cCharsWritten);
+        FillConsoleOutputCharacter(hConsole, (TCHAR)' ', dwConSize, coordScreen, &cCharsWritten);
 
         GetConsoleScreenBufferInfo(hConsole, &csbi);
         FillConsoleOutputAttribute(hConsole, csbi.wAttributes, dwConSize, coordScreen, &cCharsWritten);
@@ -652,26 +597,25 @@ namespace rlutil {
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
         COORD coord;
         // TODO: clamping/assert for x/y <= 0?
-        coord.X = (SHORT) (x - 1);
-        coord.Y = (SHORT) (y - 1); // Windows uses 0-based coordinates
+        coord.X = (SHORT)(x - 1);
+        coord.Y = (SHORT)(y - 1); // Windows uses 0-based coordinates
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 #else // _WIN32 || USE_ANSI
-#ifdef __cplusplus
-        RLUTIL_PRINT("\033[" << y << ";" << x << "H");
-#else // __cplusplus
-        char buf[32];
-        sprintf(buf, "\033[%d;%df", y, x);
-        RLUTIL_PRINT(buf);
-#endif // __cplusplus
+        #ifdef __cplusplus
+		RLUTIL_PRINT("\033[" << y << ";" << x << "H");
+	#else // __cplusplus
+		char buf[32];
+		sprintf(buf, "\033[%d;%df", y, x);
+		RLUTIL_PRINT(buf);
+	#endif // __cplusplus
 #endif // _WIN32 || USE_ANSI
     }
 
 /// Function: setString
 /// Prints the supplied string without advancing the cursor
 #ifdef __cplusplus
-
-    RLUTIL_INLINE void setString(const RLUTIL_STRING_T &str_) {
-        const char *const str = str_.data();
+    RLUTIL_INLINE void setString(const RLUTIL_STRING_T & str_) {
+        const char * const str = str_.data();
         unsigned int len = str_.size();
 #else // __cplusplus
         RLUTIL_INLINE void setString(RLUTIL_STRING_T str) {
@@ -707,11 +651,11 @@ namespace rlutil {
 /// Shows/hides the cursor.
     RLUTIL_INLINE void setCursorVisibility(char visible) {
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
-        HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+        HANDLE hConsoleOutput = GetStdHandle( STD_OUTPUT_HANDLE );
         CONSOLE_CURSOR_INFO structCursorInfo;
-        GetConsoleCursorInfo(hConsoleOutput, &structCursorInfo); // Get current cursor size
+        GetConsoleCursorInfo( hConsoleOutput, &structCursorInfo ); // Get current cursor size
         structCursorInfo.bVisible = (visible ? TRUE : FALSE);
-        SetConsoleCursorInfo(hConsoleOutput, &structCursorInfo);
+        SetConsoleCursorInfo( hConsoleOutput, &structCursorInfo );
 #else // _WIN32 || USE_ANSI
         RLUTIL_PRINT((visible ? ANSI_CURSOR_SHOW : ANSI_CURSOR_HIDE));
 #endif // _WIN32 || USE_ANSI
@@ -759,16 +703,16 @@ namespace rlutil {
             return csbi.srWindow.Bottom - csbi.srWindow.Top + 1; // Window height
         // return csbi.dwSize.Y; // Buffer height
 #else
-#ifdef TIOCGSIZE
-        struct ttysize ts;
-        ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-        return ts.ts_lines;
+        #ifdef TIOCGSIZE
+	struct ttysize ts;
+	ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
+	return ts.ts_lines;
 #elif defined(TIOCGWINSZ)
-        struct winsize ts;
-        ioctl(STDIN_FILENO, TIOCGWINSZ, &ts);
-        return ts.ws_row;
+	struct winsize ts;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ts);
+	return ts.ws_row;
 #else // TIOCGSIZE
-        return -1;
+	return -1;
 #endif // TIOCGSIZE
 #endif // _WIN32
     }
@@ -784,16 +728,16 @@ namespace rlutil {
             return csbi.srWindow.Right - csbi.srWindow.Left + 1; // Window width
         // return csbi.dwSize.X; // Buffer width
 #else
-#ifdef TIOCGSIZE
-        struct ttysize ts;
-        ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-        return ts.ts_cols;
+        #ifdef TIOCGSIZE
+	struct ttysize ts;
+	ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
+	return ts.ts_cols;
 #elif defined(TIOCGWINSZ)
-        struct winsize ts;
-        ioctl(STDIN_FILENO, TIOCGWINSZ, &ts);
-        return ts.ws_col;
+	struct winsize ts;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ts);
+	return ts.ws_col;
 #else // TIOCGSIZE
-        return -1;
+	return -1;
 #endif // TIOCGSIZE
 #endif // _WIN32
     }
@@ -811,8 +755,7 @@ namespace rlutil {
         getch();
     }
 
-    template<class T>
-    void anykey(const T &msg) {
+    template <class T> void anykey(const T& msg) {
         RLUTIL_PRINT(msg);
 #else
         RLUTIL_INLINE void anykey(RLUTIL_STRING_T msg) {
@@ -823,23 +766,32 @@ namespace rlutil {
     }
 
 #ifdef __cplusplus
-
-    RLUTIL_INLINE void setConsoleTitle(const RLUTIL_STRING_T &title) {
-        const char *true_title = title.c_str();
+    RLUTIL_INLINE void setConsoleTitle(const RLUTIL_STRING_T & title) {
+        const char * true_title = title.c_str();
 #else // __cplusplus
         RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T title) {
-            const char *true_title = title;
+            const char * true_title = title;
 #endif // __cplusplus
-#if defined(_
-
-IN32) && !defined(RLUTIL_USE_ANSI)
+#if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
             SetConsoleTitleA(true_title);
 #else
             RLUTIL_PRINT(ANSI_CONSOLE_TITLE_PRE);
 	RLUTIL_PRINT(true_title);
 	RLUTIL_PRINT(ANSI_CONSOLE_TITLE_POST);
-#endif // de
+#endif // defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
+        }
 
-        N32) && !defined(RLUTIL_USE_ANSI)
-        }// namespace rlutil
+// Classes are here at the end so that documentation is pretty.
+
+#ifdef __cplusplus
+/// Class: CursorHider
+/// RAII OOP wrapper for <rlutil.hidecursor>.
+/// Hides the cursor and shows it again
+/// when the object goes out of scope.
+    struct CursorHider {
+        CursorHider() { hidecursor(); }
+        ~CursorHider() { showcursor(); }
+    };
+
+} // namespace rlutil
 #endif

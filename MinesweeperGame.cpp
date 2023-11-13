@@ -91,7 +91,7 @@ std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
     return os;
 }
 
-void MinesweeperGame::print_mines() {
+/*void MinesweeperGame::print_mines() {
     for (int r = 0; r < row + 2; r++) {
         for (int c = 0; c < col + 2; c++) {
 
@@ -100,7 +100,7 @@ void MinesweeperGame::print_mines() {
         std::cout << std::endl;
     }
 }
-
+*/
 int MinesweeperGame::countNearbyMines() {
     int r, c;
     int nearbyMines = 0;

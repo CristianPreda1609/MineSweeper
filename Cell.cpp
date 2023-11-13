@@ -35,13 +35,13 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     return os;
 }
 
-void Cell::Flag() {
+/*void Cell::Flag() {
     isFlagged = true;
 }
 
 void Cell::notFlag() {
     isFlagged = false;
-}
+}*/
 
 void Cell::setMine() {
     isMine = true;

@@ -63,7 +63,7 @@ int main() {
     #ifdef __linux__
     XInitThreads();
     #endif
-    // Create the main window
+    /*// Create the main window
     sf::Window window(sf::VideoMode(800, 600), "My window");
 
     // run the program as long as the window is open
@@ -77,7 +77,7 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-    }
+    }*/
 
     startGame();
 

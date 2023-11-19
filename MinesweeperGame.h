@@ -20,21 +20,15 @@ private:
     std::vector<std::vector<Cell>> table;
     bool gameOver;
 
-
     void revealZeroAdjacentCells(int r, int c);
 
-
-
     void isMine(int r, int c);
-
-
-
 
     friend std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game);
 
 
 public:
-    MinesweeperGame(const int row_, const int col_, int Mines_);
+    MinesweeperGame(int row_, int col_, int Mines_);
 
     ~MinesweeperGame() = default;
 
@@ -44,7 +38,7 @@ public:
 
     int countNearbyMines();
 
-    bool getSit() const;
+    [[nodiscard]] bool getSit() const;
 
     //void print_mines();
 

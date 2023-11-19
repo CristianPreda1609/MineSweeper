@@ -17,7 +17,7 @@ Cell &Cell::operator=(const Cell &other) {
     isMine = other.isMine;
     isUncovered = other.isUncovered;
     nr_mine = other.nr_mine;
-    beModified = beModified;
+    beModified = other.beModified;
     return *this;
 }
 
@@ -66,7 +66,7 @@ void Cell::pressCell() {
 
 }
 
-bool Cell::Mine() {
+bool Cell::Mine() const {
     return isMine;
 }
 
@@ -77,7 +77,7 @@ int Cell::nrMine() const {
 void Cell::modify(bool a) {
     beModified = a;
 }
-bool Cell::canBeModified()
+bool Cell::canBeModified() const
 {
     return beModified;
 }

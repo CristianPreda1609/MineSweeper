@@ -10,7 +10,7 @@
 class Player {
 private:
     int score;
-    char name[31];
+    char name[31]{};
 
 public:
     Player(const char* playerName, int playerScore);

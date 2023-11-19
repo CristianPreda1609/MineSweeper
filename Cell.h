@@ -29,7 +29,6 @@ public:
     void setMine();
 
     void setNrMines(const int &NrMines);
-    void getisMine();
 
     [[nodiscard]] bool Press() const;
 
@@ -37,13 +36,13 @@ public:
 
     void pressCell();
 
-    bool Mine();
+    [[nodiscard]] bool Mine() const;
 
     [[nodiscard]] int nrMine() const;
 
     void modify(bool a);
 
-    bool canBeModified();
+    [[nodiscard]] bool canBeModified() const;
 
 
 };

@@ -12,7 +12,7 @@
 #endif
 
 
-void startGame() {
+void startGame() {//
    std::string nume;
     do {
         std::cout

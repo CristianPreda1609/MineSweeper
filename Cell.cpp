@@ -4,12 +4,12 @@
 
 #include "Cell.h"
 
-Cell::Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine)
-        : nr_mine(nr_mine), isFlagged(isFlagged), isPressed(isPressed), isMine(isMine), isUncovered(isUncovered) {
+Cell::Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine, bool beModified)
+        : nr_mine(nr_mine), isFlagged(isFlagged), isPressed(isPressed), isMine(isMine), isUncovered(isUncovered), beModified(beModified) {
 }
 
 Cell::Cell(const Cell &other) : nr_mine{other.nr_mine}, isFlagged{other.isFlagged}, isPressed{other.isPressed},
-                                isMine{other.isMine}, isUncovered{other.isUncovered} {}
+                                isMine{other.isMine}, isUncovered{other.isUncovered}, beModified(other.beModified) {}
 
 Cell &Cell::operator=(const Cell &other) {
     isFlagged = other.isFlagged;
@@ -17,6 +17,7 @@ Cell &Cell::operator=(const Cell &other) {
     isMine = other.isMine;
     isUncovered = other.isUncovered;
     nr_mine = other.nr_mine;
+    beModified = beModified;
     return *this;
 }
 
@@ -72,3 +73,12 @@ bool Cell::Mine() {
 int Cell::nrMine() const {
     return nr_mine;
 }
+
+void Cell::modify(bool a) {
+    beModified = a;
+}
+bool Cell::canBeModified()
+{
+    return beModified;
+}
+

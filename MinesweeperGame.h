@@ -21,26 +21,34 @@ private:
     bool gameOver;
 
 
-public:
-    MinesweeperGame(const int row_, const int col_, int Mines_);
-
-    void placeMines();
-
     void revealZeroAdjacentCells(int r, int c);
 
-    void pressCell(int r, int c);
+
 
     void isMine(int r, int c);
 
-    bool getSit() const;
+
 
 
     friend std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game);
 
-    void print_mines();
+
+public:
+    MinesweeperGame(const int row_, const int col_, int Mines_);
+
+    ~MinesweeperGame() = default;
+
+    void placeMines();
+
+    void pressCell(int r, int c);
 
     int countNearbyMines();
 
+    bool getSit() const;
+
+    //void print_mines();
+
+    void startCell(int r, int c, int ran);
 };
 
 #endif //OOP_MINESWEEPERGAME_H

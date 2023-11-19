@@ -5,15 +5,27 @@
 #include <thread>
 #include "MinesweeperGame.h"
 #include <rlutil.h>
+#include <cstring>
+#include "Player.h"
 
 #ifdef __linux__
 #include <X11/Xlib.h>
 #endif
 
-void startGame() {
 
+void startGame() {
+    char nume[31];
+    do {
+        std::cout
+                << "Alege Numele(maxim 30 caractere):";
+
+        std::cin >> nume;
+    }while(strlen(nume)>31);
+    Player player(nume,0);
+    rlutil::cls();
+    std::cout<<"Numele si scorul tau sunt: "<< player<<"\n";
     std::cout
-            << "Alege Nivelul:\r\n 1.Incepator (Matrice 9x9 cu 10 mine) \r\n 2.Intermediar (Matrice 16x16 cu 40 de mine)\r\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
+            << "Salut "<< nume <<"\nAlege Nivelul:\n 1.Incepator (Matrice 9x9 cu 10 mine) \n 2.Intermediar (Matrice 16x16 cu 40 de mine)\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
     int cho, r, c;
     std::cin >> cho;
     MinesweeperGame game(0, 0, 0);
@@ -32,10 +44,28 @@ void startGame() {
             break;
         }
     }
-    game.placeMines();
-    game.countNearbyMines();
+    std::cout<<game;
+    std::cout << "\r\n";
+    std::cout
+    << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+
+    std::cin >> r >> c;
+    if (r == -1 && c == -1) {
+        std::cout << "\n Ati iesit \n";
+    }
+    if (!(r < 0 || c < 0)) {
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> rann(4, 10);
+        int ran = rann(gen);
+        game.startCell(r, c, ran);
+        game.placeMines();
+        game.countNearbyMines();
+    }
     while (true) {
         rlutil::cls();
+
         std::cout << game;
         std::cout << "\r\n";
         std::cout
@@ -46,6 +76,8 @@ void startGame() {
             break;
         }
         if (!(r < 0 || c < 0)) {
+            game.placeMines();
+            game.countNearbyMines();
             game.pressCell(r, c);
             if (game.getSit()) {
                 std::cout << "\n Game Over \n";

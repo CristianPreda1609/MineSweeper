@@ -10,9 +10,9 @@
 class Cell {
 private:
     int nr_mine{};
-    bool isFlagged, isPressed, isMine, isUncovered;
+    bool isFlagged, isPressed, isMine, isUncovered, beModified;
 public:
-    Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine);
+    Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine, bool beModified);
 
     Cell(const Cell &other);
 
@@ -22,13 +22,14 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
 
-    void Flag();
+    //void Flag();
 
-    void notFlag();
+    //void notFlag();
 
     void setMine();
 
     void setNrMines(const int &NrMines);
+    void getisMine();
 
     [[nodiscard]] bool Press() const;
 
@@ -39,6 +40,10 @@ public:
     bool Mine();
 
     [[nodiscard]] int nrMine() const;
+
+    void modify(bool a);
+
+    bool canBeModified();
 
 
 };

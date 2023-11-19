@@ -114,6 +114,8 @@ add_executable(${PROJECT_NAME} main.cpp
         MinesweeperGame.cpp
         MinesweeperGame.h
         ext/rlutil.h
+        Player.cpp
+        Player.h
 )
 
 ###############################################################################

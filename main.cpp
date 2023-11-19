@@ -45,7 +45,7 @@ void startGame() {
         }
     }
     std::cout<<game;
-    std::cout << "\r\n";
+    std::cout << "\r\n ";
     std::cout
     << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
 

@@ -4,9 +4,9 @@
 
 #include "MinesweeperGame.h"
 
-MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_)
-        : row{row_}, col{col_}, Mines{Mines_},
-          table(row_ + 2, std::vector<Cell>(col_ + 2, Cell(false, false, false, false, 0, true))), gameOver(false) {
+MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume, int scor )
+        : row{row_}, col{col_}, Mines{Mines_}, table(row_ + 2, std::vector<Cell>(col_ + 2, Cell(false, false, false, false, 0, true))) ,
+          player(nume,scor), gameOver(false) {
     for (int c = 1; c < col + 2; c++) {
         table[0][c] = Cell(false, false, false, false, c - 1, true);
     }
@@ -17,6 +17,7 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_)
     }
 
 }
+
 
 void MinesweeperGame::placeMines() {
     std::random_device rd;
@@ -150,6 +151,26 @@ void MinesweeperGame::startCell(int r, int c, int ran){
     }
 
 
-};
+}
+
+/*void MinesweeperGame::setName2(const std::string &newName) {
+    player.setName(newName);
+}*/
+
+std::string MinesweeperGame::getName2() const {
+    return player.getName();
+}
+
+void MinesweeperGame::afisarePlayer() {
+    std::cout<<player;
+}
+
+/*int MinesweeperGame::getScore2() {
+    return player.getScore();
+}*/
+
+/*void MinesweeperGame::setScore2(const int scor) {
+    player.setScore(scor);
+}*/
 
 

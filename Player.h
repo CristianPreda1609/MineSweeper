@@ -5,24 +5,27 @@
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
 #include <iostream>
-#include <cstring>
+#include <string>
 
 class Player {
 private:
+    std::string name;
     int score;
-    char name[31]{};
+    friend std::ostream &operator<<(std::ostream &os, const Player &player);
 
 public:
-    Player(const char* playerName, int playerScore);
-
+    Player(const std::string& playerName, int playerScore);
     ~Player() = default;
 
-    friend std::ostream& operator<<(std::ostream& os, const Player& player);
-    /*void setName(const char* newName);
-    void setScore(const int points ){
-        score += points;
-    };*/
-    //char* getNume();
-};
+    //void setName(const std::string& newName);
 
+    std::string getName() const;
+
+   // void setScore(const int scor);
+
+   // int getScore();
+
+
+
+};
 #endif //OOP_PLAYER_H

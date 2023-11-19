@@ -5,8 +5,7 @@
 #include <thread>
 #include "MinesweeperGame.h"
 #include <rlutil.h>
-#include <cstring>
-#include "Player.h"
+#include <string>
 
 #ifdef __linux__
 #include <X11/Xlib.h>
@@ -14,33 +13,35 @@
 
 
 void startGame() {
-    char nume[31];
+   std::string nume;
     do {
         std::cout
                 << "Alege Numele(maxim 30 caractere):";
 
         std::cin >> nume;
-    }while(strlen(nume)>31);
-    Player player(nume,0);
+    }while(nume.size()>31);
     rlutil::cls();
-    std::cout<<"Numele si scorul tau sunt: "<< player<<"\n";
+    MinesweeperGame game(0, 0, 0, nume, 0);
+    std::cout<<"Numele si scorul tau sunt: " ;
+    game.afisarePlayer() ;
+    std::cout<<"\n";
     std::cout
             << "Salut "<< nume <<"\nAlege Nivelul:\n 1.Incepator (Matrice 9x9 cu 10 mine) \n 2.Intermediar (Matrice 16x16 cu 40 de mine)\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
     int cho, r, c;
     std::cin >> cho;
-    MinesweeperGame game(0, 0, 0);
+
 
     switch (cho) {
         case 1: {
-            game = MinesweeperGame(9, 9, 10);
+            game = MinesweeperGame(9, 9, 10, game.getName2(), 0);
             break;
         }
         case 2: {
-            game = MinesweeperGame(16, 16, 40);
+            game = MinesweeperGame(16, 16, 40, game.getName2(), 0);
             break;
         }
         case 3: {
-            game = MinesweeperGame(16, 30, 99);
+            game = MinesweeperGame(16, 30, 99, game.getName2(), 0);
             break;
         }
     }

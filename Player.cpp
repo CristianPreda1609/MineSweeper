@@ -4,21 +4,25 @@
 
 #include "Player.h"
 
-/*void Player::setName(const char *newName) {
-    strncpy(name, newName, sizeof(name) - 1);
-    name[sizeof(name) - 1] = '\0';
-}*/
-
 std::ostream &operator<<(std::ostream &os, const Player &player) {
     os << "Nume: " << player.name << ", Scor: " << player.score;
     return os;
 }
 
-Player::Player(const char *playerName, int playerScore) : score(playerScore) {
-    strncpy(name, playerName, sizeof(name) - 1);
-    name[sizeof(name) - 1] = '\0';
+Player::Player(const std::string &playerName, int playerScore) : name(playerName), score(playerScore) {}
+
+/*void Player::setName(const std::string &newName) {
+    name = newName;
+}*/
+
+std::string Player::getName() const {
+    return name;
 }
 
-/*char *Player::getNume() {
-    return name;
+/*int Player::getScore() {
+    return score;
+}
+
+void Player::setScore(const int scor) {
+    score = scor;
 }*/

@@ -10,6 +10,7 @@
 #include "Cell.h"
 #include <random>
 #include "rlutil.h"
+#include "Player.h"
 
 
 class MinesweeperGame {
@@ -18,6 +19,7 @@ private:
     int col;
     int Mines;
     std::vector<std::vector<Cell>> table;
+    Player player;
     bool gameOver;
 
     void revealZeroAdjacentCells(int r, int c);
@@ -28,7 +30,7 @@ private:
 
 
 public:
-    MinesweeperGame(int row_, int col_, int Mines_);
+    MinesweeperGame(int row_, int col_, int Mines_, const std::string& nume, int scor);
 
     ~MinesweeperGame() = default;
 
@@ -43,6 +45,16 @@ public:
     //void print_mines();
 
     void startCell(int r, int c, int ran);
+
+    //void setName2(const std::string& newName);
+
+    [[nodiscard]] std::string getName2() const;
+
+    //void setScore2(const int scor);
+
+    //int getScore2();
+
+    void afisarePlayer();
 };
 
 #endif //OOP_MINESWEEPERGAME_H

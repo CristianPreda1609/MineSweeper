@@ -5,15 +5,15 @@
 #include "MinesweeperGame.h"
 
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume, int scor )
-        : row{row_}, col{col_}, Mines{Mines_}, table(row_ + 2, std::vector<Cell>(col_ + 2, Cell(false, false, false, false, 0, true))) ,
+        : row{row_}, col{col_}, Mines{Mines_}, table(row_ , std::vector<Cell>(col_ , Cell(false, false, false, false, 0, true))) ,
           player(nume,scor), gameOver(false) {
-    for (int c = 1; c < col + 2; c++) {
-        table[0][c] = Cell(false, false, false, false, c - 1, true);
+    for (int c = 0; c < col ; c++) {
+        table[0][c] = Cell(false, false, false, false, c , true);
     }
 
 
-    for (int r = 1; r < row + 2; r++) {
-        table[r][0] = Cell(false, false, false, false, r - 1, true);
+    for (int r = 0; r < row ; r++) {
+        table[r][0] = Cell(false, false, false, false, r , true);
     }
 
 }
@@ -22,49 +22,51 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
 void MinesweeperGame::placeMines() {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> rowDist(1, row + 1);
-    std::uniform_int_distribution<int> colDist(1, col + 1);
+    std::uniform_int_distribution<int> rowDist(1, row - 1 );
+    std::uniform_int_distribution<int> colDist(1, col - 1);
 
     for (int i = 0; i < Mines; ++i) {
+
         int randomRow = rowDist(gen);
         int randomCol = colDist(gen);
 
         if (!table[randomRow][randomCol].Mine() && table[randomRow][randomCol].canBeModified()) {
             table[randomRow][randomCol].setMine();
         } else {
-
             --i;
         }
     }
 }
 
 void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
-    if (r < 1 || r > row || c < 1 || c > col || table[r][c].Press()) {
+
+    if (r < 1 || r >= row || c < 1 || c >= col || table[r][c].Press() || table[r][c].Mine()) {
+
         return;
     }
 
-    if (table[r][c].Mine() == 0 ) {
-        table[r][c].pressCell();
-
-        for (int dr = -1; dr <= 1; ++dr) {
-            for (int dc = -1; dc <= 1; ++dc) {
-                revealZeroAdjacentCells(r + dr, c + dc);
-            }
-        }
+    table[r][c].pressCell();
+    if(table[r][c].nrMine() == 0) {
+        revealZeroAdjacentCells(r+1, c + 1);
+        revealZeroAdjacentCells(r, c + 1);
+        revealZeroAdjacentCells(r, c - 1);
+        revealZeroAdjacentCells(r + 1, c);
+        revealZeroAdjacentCells(r - 1, c);
+        revealZeroAdjacentCells(r - 1, c-1);
+        revealZeroAdjacentCells(r + 1, c-1);
+        revealZeroAdjacentCells(r -1 , c+1);
     }
 }
 
+
+
 void MinesweeperGame::pressCell(int r, int c) {
-    if (table[r + 1][c + 1].Press()) {
+    if(table[r][c].Press())
         return;
-    }
 
-    table[r + 1][c + 1].pressCell();
-    isMine(r + 1, c + 1);
+    isMine(r,c);
 
-    if (table[r][c].nrMine() == 0) {
-        revealZeroAdjacentCells(r, c);
-    }
+        revealZeroAdjacentCells(r,c);
 }
 
 void MinesweeperGame::isMine(int r, int c) {
@@ -77,8 +79,8 @@ bool MinesweeperGame::getSit() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
-    for (int r = 0; r < game.row + 2; r++) {
-        for (int c = 0; c < game.col + 2; c++) {
+    for (int r = 0; r < game.row; r++) {
+        for (int c = 0; c < game.col; c++) {
             if (r != 0 && c != 0) {
                 if (game.table[r][c].Press()) {
                     os << game.table[r][c].nrMine() << " ";
@@ -93,10 +95,10 @@ std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
 }
 
 /*void MinesweeperGame::print_mines() {
-    for (int r = 0; r < row + 2; r++) {
-        for (int c = 0; c < col + 2; c++) {
+    for (int r = 1; r < row; r++) {
+        for (int c = 1; c < col; c++) {
 
-            std::cout << table[r][c].Mine();
+            std::cout <<" "<< table[r][c].Mine()<<" ";
         }
         std::cout << std::endl;
     }
@@ -106,8 +108,8 @@ int MinesweeperGame::countNearbyMines() {
     int r, c;
     int nearbyMines = 0;
 
-    for (r = 1; r < row + 2; ++r) {
-        for (c = 1; c < col + 2; ++c) {
+    for (r = 1; r < row; ++r) {
+        for (c = 1; c < col; ++c) {
             nearbyMines = 0;
 
             const int dr[] = {-1, -1, -1, 0, 0, 1, 1, 1};
@@ -132,25 +134,23 @@ int MinesweeperGame::countNearbyMines() {
     return nearbyMines;
 }
 
-void MinesweeperGame::startCell(int r, int c, int ran){
+void MinesweeperGame::startCell(int r, int c, int ran) {
     if (ran <= 0 || r < 1 || r > row || c < 1 || c > col || !table[r][c].canBeModified()) {
         return;
     }
 
-    table[r][c].pressCell();
     table[r][c].modify(false);
-    ran--;
 
     int offsets[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-
     for (int i = 0; i < 8; ++i) {
         int randRow = r + offsets[i][0];
         int randCol = c + offsets[i][1];
 
-        startCell(randRow, randCol, ran);
+        // Check if within the range of 6 cells and not modified yet
+        if (ran > 1) {
+            startCell(randRow, randCol, ran - 1);
+        }
     }
-
-
 }
 
 /*void MinesweeperGame::setName2(const std::string &newName) {
@@ -172,5 +172,4 @@ void MinesweeperGame::afisarePlayer() {
 /*void MinesweeperGame::setScore2(const int scor) {
     player.setScore(scor);
 }*/
-
 

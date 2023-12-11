@@ -13,7 +13,7 @@
 
 
 void startGame() {
-   std::string nume;
+    std::string nume;
     do {
         std::cout
                 << "Alege Numele(maxim 30 caractere):";
@@ -33,22 +33,22 @@ void startGame() {
 
     switch (cho) {
         case 1: {
-            game = MinesweeperGame(9, 9, 10, game.getName2(), 0);
+            game = MinesweeperGame(10, 10, 10, game.getName2(), 0);
             break;
         }
         case 2: {
-            game = MinesweeperGame(16, 16, 40, game.getName2(), 0);
+            game = MinesweeperGame(17, 17, 40, game.getName2(), 0);
             break;
         }
         case 3: {
-            game = MinesweeperGame(16, 30, 99, game.getName2(), 0);
+            game = MinesweeperGame(17, 31, 99, game.getName2(), 0);
             break;
         }
     }
     std::cout<<game;
     std::cout << "\r\n ";
     std::cout
-    << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+            << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
 
     std::cin >> r >> c;
     if (r == -1 && c == -1) {
@@ -60,14 +60,22 @@ void startGame() {
         std::mt19937 gen(rd());
         std::uniform_int_distribution<int> rann(4, 10);
         int ran = rann(gen);
+
         game.startCell(r, c, ran);
+
         game.placeMines();
+
         game.countNearbyMines();
+
+        game.pressCell(r,c);
+
     }
     while (true) {
         rlutil::cls();
 
         std::cout << game;
+        std::cout<<"\r";
+        std::cout<<"\r";
         std::cout << "\r\n";
         std::cout
                 << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
@@ -77,8 +85,6 @@ void startGame() {
             break;
         }
         if (!(r < 0 || c < 0)) {
-            game.placeMines();
-            game.countNearbyMines();
             game.pressCell(r, c);
             if (game.getSit()) {
                 std::cout << "\n Game Over \n";
@@ -93,9 +99,9 @@ void startGame() {
 
 
 int main() {
-    #ifdef __linux__
+#ifdef __linux__
     XInitThreads();
-    #endif
+#endif
     /*// Create the main window
     sf::Window window(sf::VideoMode(800, 600), "My window");
 

@@ -60,13 +60,9 @@ void startGame() {
         std::mt19937 gen(rd());
         std::uniform_int_distribution<int> rann(4, 10);
         int ran = rann(gen);
-
         game.startCell(r, c, ran);
-
         game.placeMines();
-
         game.countNearbyMines();
-
         game.pressCell(r,c);
 
     }

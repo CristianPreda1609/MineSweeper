@@ -21,31 +21,41 @@ void startGame() {
         std::cin >> nume;
     }while(nume.size()>31);
     rlutil::cls();
-    MinesweeperGame game(0, 0, 0, nume, 0);
-    std::cout<<"Numele si scorul tau sunt: " ;
-    game.afisarePlayer() ;
+    std::cout<<"Numele si scorul tau sunt: "<<nume <<" 0 " ;
     std::cout<<"\n";
     std::cout
             << "Salut "<< nume <<"\nAlege Nivelul:\n 1.Incepator (Matrice 9x9 cu 10 mine) \n 2.Intermediar (Matrice 16x16 cu 40 de mine)\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
     int cho, r, c;
     std::cin >> cho;
-
-
+    int row = 0;
+    int col = 0;
+    int mines = 0;
     switch (cho) {
         case 1: {
-            game = MinesweeperGame(10, 10, 10, game.getName2(), 0);
+             row = 10;
+             col = 10;
+             mines = 10;
             break;
         }
         case 2: {
-            game = MinesweeperGame(17, 17, 40, game.getName2(), 0);
+            row = 17;
+            col = 17;
+            mines = 40;
             break;
         }
         case 3: {
-            game = MinesweeperGame(17, 31, 99, game.getName2(), 0);
+            row = 17;
+            col = 31;
+            mines = 99;
+            break;
+        }
+        default : {
+            std::cout<<"Valoare incorecta!";
             break;
         }
     }
-    std::cout<<game;
+    MinesweeperGame game(row, col, mines, nume, 0);
+    std::cout << game;
     std::cout << "\r\n ";
     std::cout
             << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
@@ -61,32 +71,69 @@ void startGame() {
         std::uniform_int_distribution<int> rann(4, 10);
         int ran = rann(gen);
         game.startCell(r, c, ran);
+        try {
         game.placeMines();
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+
+        }
         game.countNearbyMines();
         game.pressCell(r,c);
 
     }
     while (true) {
         rlutil::cls();
-
+        int numb;
         std::cout << game;
         std::cout<<"\r";
         std::cout<<"\r";
         std::cout << "\r\n";
         std::cout
-                << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
-        std::cin >> r >> c;
-        if (r == -1 && c == -1) {
-            std::cout << "\n Ati iesit \n";
-            break;
-        }
-        if (!(r < 0 || c < 0)) {
-            game.pressCell(r, c);
-            if (game.getSit()) {
-                std::cout << "\n Game Over \n";
+        << "Introduceti 1 daca dorit sa apasati o celula, 2 daca doriti sa puneti un steag pe celula sau 3 pentru a lua steagul de pe o celula: ";
+        std::cin >> numb;
+        if(numb == 1) {
+            std::cout
+                    << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+            std::cin >> r >> c;
+            if (r == -1 && c == -1) {
+                std::cout << "\n Ati iesit \n";
                 break;
             }
-            std::cout << game;
+            if (!(r < 0 || c < 0)) {
+                bool a;
+                a = game.pressCell(r, c);
+                if (a)
+                    break;
+                std::cout << game;
+            }
+        }
+        else if(numb == 2){
+            std::cout
+                    << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+            std::cin >> r >> c;
+            if (r == -1 && c == -1) {
+                std::cout << "\n Ati iesit \n";
+                break;
+            }
+            if (!(r < 0 || c < 0)) {
+
+                 game.flagg(r, c);
+
+            }
+        }
+        else if(numb == 3){
+            std::cout
+                    << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+            std::cin >> r >> c;
+            if (r == -1 && c == -1) {
+                std::cout << "\n Ati iesit \n";
+                break;
+            }
+            if (!(r < 0 || c < 0)) {
+
+                game.unflag(r, c);
+
+            }
         }
     }
 
@@ -98,7 +145,7 @@ int main() {
 #ifdef __linux__
     XInitThreads();
 #endif
-    /*// Create the main window
+    /*  Create the main window
     sf::Window window(sf::VideoMode(800, 600), "My window");
 
     // run the program as long as the window is open

@@ -4,34 +4,22 @@
 
 #include "Cell.h"
 
-Cell::Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine, bool beModified)
-        : nr_mine(nr_mine), isFlagged(isFlagged), isPressed(isPressed), isMine(isMine), isUncovered(isUncovered), beModified(beModified) {
+Cell::Cell(bool isPressed, bool isMine, int nr_mine, bool beModified)
+        : nr_mine(nr_mine), isPressed(isPressed), isMine(isMine), beModified(beModified) {
 }
 
-Cell::Cell(const Cell &other) : nr_mine{other.nr_mine}, isFlagged{other.isFlagged}, isPressed{other.isPressed},
-                                isMine{other.isMine}, isUncovered{other.isUncovered}, beModified(other.beModified) {}
-
-Cell &Cell::operator=(const Cell &other) {
-    isFlagged = other.isFlagged;
-    isPressed = other.isPressed;
-    isMine = other.isMine;
-    isUncovered = other.isUncovered;
-    nr_mine = other.nr_mine;
-    beModified = other.beModified;
-    return *this;
-}
+Cell::Cell(const Cell &other) = default;
 
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
-    if (cell.isFlagged) {
-        os << "F";
-    } else if (cell.isPressed) {
-        if (cell.isMine) {
-            os << "*";
-        } else {
+     if (cell.isPressed) {
+        if (!(cell.isMine)) {
             os << cell.nr_mine;
+
+        } else {
+            os << "*";
         }
     } else {
-        os << ".";
+        os << "?";
     }
     return os;
 }
@@ -44,9 +32,9 @@ void Cell::notFlag() {
     isFlagged = false;
 }*/
 
-void Cell::setMine() {
+/*void Cell::setMine() {
     isMine = true;
-}
+}*/
 
 void Cell::setNrMines(const int &NrMines) {
     nr_mine = NrMines;
@@ -56,12 +44,9 @@ bool Cell::Press() const {
     return isPressed;
 }
 
-void Cell::uncoverCell() {
-    isUncovered = true;
-}
 
 void Cell::pressCell() {
-    uncoverCell();
+
     isPressed = true;
 
 }
@@ -70,7 +55,7 @@ bool Cell::Mine() const {
     return isMine;
 }
 
-int Cell::nrMine() const {
+  int Cell::nrMine() const {
     return nr_mine;
 }
 
@@ -81,4 +66,22 @@ bool Cell::canBeModified() const
 {
     return beModified;
 }
+
+void swap(Cell &first, Cell &second) noexcept {
+    using std::swap;
+    std::swap(first.nr_mine, second.nr_mine);
+    std::swap(first.isPressed, second.isPressed);
+    std::swap(first.isMine, second.isMine);
+    std::swap(first.beModified, second.beModified);
+}
+
+Cell &Cell::operator=(const Cell &other) = default; /*{
+    if (this != &other) {
+        nr_mine = other.nr_mine;
+        isPressed = other.isPressed;
+        isMine = other.isMine;
+        beModified = other.beModified;
+    }
+    return *this;
+}*/
 

@@ -9,7 +9,8 @@ std::ostream &operator<<(std::ostream &os, const Player &player) {
     return os;
 }
 
-Player::Player(const std::string &playerName, int playerScore) : name(playerName), score(playerScore) {}
+Player::Player( const std::string &playerName, int playerScore) : User(
+        playerName, playerScore), name{playerName}, score{playerScore} {}
 
 /*void Player::setName(const std::string &newName) {
     name = newName;

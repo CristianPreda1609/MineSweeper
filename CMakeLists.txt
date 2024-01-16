@@ -116,6 +116,18 @@ add_executable(${PROJECT_NAME} main.cpp
         ext/rlutil.h
         Player.cpp
         Player.h
+        User.cpp
+        User.h
+        MineCell.cpp
+        MineCell.h
+        FlagCell.cpp
+        FlagCell.h
+        ExceptionBase.cpp
+        ExceptionBase.h
+        FirstException.cpp
+        FirstException.h
+        SecondException.cpp
+        SecondException.h
 )
 
 ###############################################################################

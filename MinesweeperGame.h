@@ -11,6 +11,14 @@
 #include <random>
 #include "rlutil.h"
 #include "Player.h"
+#include "FlagCell.h"
+#include "MineCell.h"
+#include <type_traits>
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
 
 
 
@@ -19,15 +27,22 @@ private:
     int row;
     int col;
     int Mines;
-    std::vector<std::vector<Cell>> table;
+    std::vector<std::vector<Cell*>> table;
     Player player;
     bool gameOver;
+    bool gameWon;
 
     void revealZeroAdjacentCells(int r, int c);
 
     void isMine(int r, int c);
 
     friend std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game);
+
+    [[nodiscard]] bool getSit() const;
+
+    [[nodiscard]] bool isgameWon() const;
+
+    void isCell0 ();
 
 
 public:
@@ -37,25 +52,41 @@ public:
 
     void placeMines();
 
-    void pressCell(int r, int c);
+    bool pressCell(int r, int c);
 
     int countNearbyMines();
 
-    [[nodiscard]] bool getSit() const;
+    void flagg(int r, int c){
+        int nr_mine;
+        bool ismine, bemodify;
+        nr_mine = table[r][c]->nrMine();
+        ismine = table[r][c]->Mine();
+        bemodify = table[r][c]->canBeModified();
+        delete table[r][c];
+        table[r][c] = new FlagCell(ismine,nr_mine,bemodify);
+    }
 
-    //void print_mines();
-
+    void unflag(int r, int c){
+        int nr_mine;
+        bool ismine, bemodify;
+        nr_mine = table[r][c]->nrMine();
+        ismine = table[r][c]->Mine();
+        bemodify = table[r][c]->canBeModified();
+        delete table[r][c];
+        table[r][c] = new Cell(false, ismine, nr_mine, bemodify);
+    }
     void startCell(int r, int c, int ran);
 
     //void setName2(const std::string& newName);
 
-    [[nodiscard]] std::string getName2() const;
+    //[[nodiscard]] std::string getName2() const;
 
     //void setScore2(const int scor);
 
     //int getScore2();
 
-    void afisarePlayer();
+    //void afisarePlayer();
+
 };
 
 #endif //OOP_MINESWEEPERGAME_H

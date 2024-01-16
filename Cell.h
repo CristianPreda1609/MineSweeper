@@ -5,44 +5,46 @@
 #ifndef OOP_CELL_H
 #define OOP_CELL_H
 
-#include <ostream>
+#include <iostream>
+#include <algorithm>
 
 class Cell {
 private:
-    int nr_mine{};
-    bool isFlagged, isPressed, isMine, isUncovered, beModified;
+    int nr_mine;
+    bool isPressed, isMine, beModified;
+    friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+
 public:
-    Cell(bool isFlagged, bool isPressed, bool isMine, bool isUncovered, int nr_mine, bool beModified);
+
+    Cell( bool isPressed, bool isMine, int nr_mine, bool beModified);
 
     Cell(const Cell &other);
 
-    Cell &operator=(const Cell &other);
+    virtual ~Cell() = default;
+    friend void swap(Cell& first, Cell& second) noexcept;
 
-    ~Cell() = default;
-
-    friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+    Cell& operator=(const Cell& other);
 
     //void Flag();
 
     //void notFlag();
 
-    void setMine();
+    //void setMine();
 
     void setNrMines(const int &NrMines);
 
-    [[nodiscard]] bool Press() const;
+    [[nodiscard]] virtual bool Press() const;
 
-    void uncoverCell();
+    virtual void pressCell();
 
-    void pressCell();
+    [[nodiscard]] virtual bool Mine() const;
 
-    [[nodiscard]] bool Mine() const;
-
-    [[nodiscard]] int nrMine() const;
+    [[nodiscard]]  int nrMine() const;
 
     void modify(bool a);
 
     [[nodiscard]] bool canBeModified() const;
+
 
 
 };

@@ -20,7 +20,7 @@ std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flag
         return os;
 }
 
-FlagCell::FlagCell(bool isMine, int nr_mine, bool beModified) : Cell(false, isMine,0, false), isMine(isMine), beModified(beModified), nr_mine(nr_mine){}
+FlagCell::FlagCell(bool isMine, int nr_mine) : Cell(false, isMine,0, false), isMine(isMine),  nr_mine(nr_mine){}
 
 void swap(FlagCell &first, FlagCell &other) {
     std::swap(first.isMine, other.isMine);

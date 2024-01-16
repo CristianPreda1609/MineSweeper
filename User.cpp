@@ -6,7 +6,7 @@
 
 #include <utility>
 
-std::ostream &operator<<(std::ostream &os, User &user) {
+std::ostream &operator<<(std::ostream &os, const User &user) {
     os<< "Nume : " << user.name << "Scor : "<< user.score;
     return os;
 }

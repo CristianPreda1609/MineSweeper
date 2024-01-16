@@ -15,11 +15,11 @@
 
 class FlagCell : public Cell{
 private:
-    bool isMine, isFlagged = true, beModified;
+    bool isMine, isFlagged = true;
     int nr_mine;
     friend std::ostream &operator<<(std::ostream &os, const FlagCell &flagcell);
 public:
-    FlagCell(bool isMine, int nr_mine, bool beModified);
+    FlagCell(bool isMine, int nr_mine);
     ~FlagCell() = default;
     friend void swap(FlagCell& first, FlagCell& other);
     FlagCell& operator=(const FlagCell& other);

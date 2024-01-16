@@ -58,22 +58,20 @@ public:
 
     void flagg(int r, int c){
         int nr_mine;
-        bool ismine, bemodify;
+        bool ismine;
         nr_mine = table[r][c]->nrMine();
         ismine = table[r][c]->Mine();
-        bemodify = table[r][c]->canBeModified();
         delete table[r][c];
-        table[r][c] = new FlagCell(ismine,nr_mine,bemodify);
+        table[r][c] = new FlagCell(ismine,nr_mine);
     }
 
     void unflag(int r, int c){
         int nr_mine;
-        bool ismine, bemodify;
+        bool ismine;
         nr_mine = table[r][c]->nrMine();
         ismine = table[r][c]->Mine();
-        bemodify = table[r][c]->canBeModified();
         delete table[r][c];
-        table[r][c] = new Cell(false, ismine, nr_mine, bemodify);
+        table[r][c] = new Cell(false, ismine, nr_mine, true);
     }
     void startCell(int r, int c, int ran);
 

@@ -15,7 +15,7 @@ private:
      std::string name;
     int score;
 
-   friend std::ostream &operator<<(std::ostream &os, User &user);
+   friend std::ostream &operator<<(std::ostream &os, const User &user);
 
 public:
 

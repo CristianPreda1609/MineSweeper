@@ -7,7 +7,7 @@ std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flag
 #ifdef _WIN32
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 #else
-    cout << "\033[1;31mText rosu\033[0m" << endl;
+    std::cout << "\033[1;31mText rosu\033[0m" << std::endl;
 #endif
 
     os << "?" ;

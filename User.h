@@ -27,18 +27,14 @@ public:
         swap(first.score, second.score);
     }
 
-    friend std::ostream &operator<<(std::ostream& os,  User& user) {
-        os << "Name: " << user.name << ", Score: " << user.score;
-        return os;
-    }
     User& operator=(User other) noexcept {
         swap(*this, other);
         return *this;
     }
-    /*virtual std::string getName() const;
-    int getScore();
-    void setName(const std::string& newName);
-    void setScore(const int scor);*/
+    /* virtual std::string getName() const;
+     int getScore();
+     void setName(const std::string& newName);
+     void setScore(const int scor);*/
 };
 
 #endif //OOP_USER_H

@@ -7,9 +7,7 @@
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume, int scor )
         : row{row_}, col{col_}, Mines{Mines_}, table(row_),
           player( nume, scor), gameOver(false), gameWon(false) {
-    if (Mines > row * col) {
-        throw std::invalid_argument("Numarul minelor depaseste marimea tablei");
-    }
+
     for (int r = 0; r < row; r++) {
         table.push_back({});
         for (int c = 0; c < col; c++) {
@@ -98,7 +96,7 @@ std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
     for (int r = 0; r < game.row; r++) {
         for (int c = 0; c < game.col; c++) {
             if (r != 0 && c != 0) {
-                if(FlagCell* flagCellPtr = dynamic_cast<FlagCell*>(game.table[r][c]))
+                if( dynamic_cast<FlagCell*>(game.table[r][c]))
                 {
                     #ifdef _WIN32
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);

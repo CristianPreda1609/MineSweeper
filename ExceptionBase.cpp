@@ -5,5 +5,5 @@
 #include "ExceptionBase.h"
 
 const char *ExceptionBase::first() const noexcept {
-    return "Eroare";
+    return "Base";
 }

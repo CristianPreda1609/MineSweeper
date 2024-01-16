@@ -16,11 +16,28 @@ private:
 
 public:
     Player( const std::string &playerName, int playerScore);
-    ~Player() = default;
+    ~Player() override = default;
+    static void swap(Player& first, Player& second) noexcept {
+        using std::swap;
+        swap(static_cast<User&>(first), static_cast<User&>(second));
+        swap(first.name, second.name);
+        swap(first.score, second.score);
+    }
+
+
+    friend std::ostream &operator<<(std::ostream &os, const Player &player) {
+        os << "Nume: " << player.name << ", Scor: " << player.score;
+        return os;
+    }
+
+    Player& operator=(Player other) noexcept {
+        swap(*this, other);
+        return *this;
+    }
 
     //void setName(const std::string& newName);
 
-    virtual std::string getName() const override;
+    //virtual std::string getName() const override;
 
    // void setScore(const int scor);
 

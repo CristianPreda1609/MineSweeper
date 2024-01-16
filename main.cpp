@@ -6,6 +6,8 @@
 #include "MinesweeperGame.h"
 #include <rlutil.h>
 #include <string>
+#include "FirstException.h"
+#include "SecondException.h"
 
 #ifdef __linux__
 #include <X11/Xlib.h>
@@ -27,9 +29,13 @@ void startGame() {
             << "Salut "<< nume <<"\nAlege Nivelul:\n 1.Incepator (Matrice 9x9 cu 10 mine) \n 2.Intermediar (Matrice 16x16 cu 40 de mine)\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
     int cho, r, c;
     std::cin >> cho;
+    if(cho <1 || cho>3){
+        throw SecondException();
+    }
     int row = 0;
     int col = 0;
     int mines = 0;
+try{
     switch (cho) {
         case 1: {
              row = 10;
@@ -53,7 +59,9 @@ void startGame() {
             std::cout<<"Valoare incorecta!";
             break;
         }
-    }
+    }} catch (const SecondException& e){
+    std::cerr << "Eroare: " << e.what() << std::endl;
+}
     MinesweeperGame game(row, col, mines, nume, 0);
     std::cout << game;
     std::cout << "\r\n ";
@@ -71,12 +79,7 @@ void startGame() {
         std::uniform_int_distribution<int> rann(4, 10);
         int ran = rann(gen);
         game.startCell(r, c, ran);
-        try {
         game.placeMines();
-        } catch (const std::invalid_argument& e) {
-            std::cerr << "Error: " << e.what() << std::endl;
-
-        }
         game.countNearbyMines();
         game.pressCell(r,c);
 
@@ -85,55 +88,62 @@ void startGame() {
         rlutil::cls();
         int numb;
         std::cout << game;
-        std::cout<<"\r";
-        std::cout<<"\r";
+        std::cout << "\r";
+        std::cout << "\r";
         std::cout << "\r\n";
         std::cout
-        << "Introduceti 1 daca dorit sa apasati o celula, 2 daca doriti sa puneti un steag pe celula sau 3 pentru a lua steagul de pe o celula: ";
+                << "Introduceti 1 daca dorit sa apasati o celula, 2 daca doriti sa puneti un steag pe celula sau 3 pentru a lua steagul de pe o celula: ";
         std::cin >> numb;
-        if(numb == 1) {
-            std::cout
-                    << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
-            std::cin >> r >> c;
-            if (r == -1 && c == -1) {
-                std::cout << "\n Ati iesit \n";
-                break;
-            }
-            if (!(r < 0 || c < 0)) {
-                bool a;
-                a = game.pressCell(r, c);
-                if (a)
+        try {
+            if (numb == 1) {
+                std::cout
+                        << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+                std::cin >> r >> c;
+                if (r < -1 || r == 0 || r > row) {
+                    if (c < -1 || c == 0 || c > col)
+                        throw FirstException();
+                }
+
+                if (r == -1 && c == -1) {
+                    std::cout << "\n Ati iesit \n";
                     break;
-                std::cout << game;
-            }
-        }
-        else if(numb == 2){
-            std::cout
-                    << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
-            std::cin >> r >> c;
-            if (r == -1 && c == -1) {
-                std::cout << "\n Ati iesit \n";
-                break;
-            }
-            if (!(r < 0 || c < 0)) {
+                }
+                if (!(r < 0 || c < 0)) {
+                    bool a;
+                    a = game.pressCell(r, c);
+                    if (a)
+                        break;
+                    std::cout << game;
+                }
+            } else if (numb == 2) {
+                std::cout
+                        << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+                std::cin >> r >> c;
+                if (r == -1 && c == -1) {
+                    std::cout << "\n Ati iesit \n";
+                    break;
+                }
+                if (!(r < 0 || c < 0)) {
 
-                 game.flagg(r, c);
+                    game.flagg(r, c);
 
-            }
-        }
-        else if(numb == 3){
-            std::cout
-                    << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
-            std::cin >> r >> c;
-            if (r == -1 && c == -1) {
-                std::cout << "\n Ati iesit \n";
-                break;
-            }
-            if (!(r < 0 || c < 0)) {
+                }
+            } else if (numb == 3) {
+                std::cout
+                        << "Introduceti coordonatele patratului pe care vreti sa puneti un steag(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+                std::cin >> r >> c;
+                if (r == -1 && c == -1) {
+                    std::cout << "\n Ati iesit \n";
+                    break;
+                }
+                if (!(r < 0 || c < 0)) {
 
-                game.unflag(r, c);
+                    game.unflag(r, c);
 
+                }
             }
+        }catch (FirstException& e){
+            std::cerr << "Eroare :" << e.what()<< std::endl;
         }
     }
 

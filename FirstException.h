@@ -11,7 +11,7 @@
 class FirstException : public ExceptionBase {
 public:
     [[nodiscard]] const char* first() const noexcept override  {
-        return "Variabila prea mare";
+        return "Rand sau coloana invalide";
     }
 };
 

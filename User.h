@@ -20,13 +20,26 @@ private:
 
 public:
 
-    User(const std::string& playerName, int playerScore);
+    User(std::string  playerName, int playerScore);
     virtual ~User() = default;
+    static void swap(User& first, User& second) noexcept {
+        using std::swap;
+        swap(first.name, second.name);
+        swap(first.score, second.score);
+    }
 
-    virtual std::string getName() const;
+    friend std::ostream &operator<<(std::ostream& os, const User& user) {
+        os << "Name: " << user.name << ", Score: " << user.score;
+        return os;
+    }
+    User& operator=(User other) noexcept {
+        swap(*this, other);
+        return *this;
+    }
+    /*virtual std::string getName() const;
     int getScore();
     void setName(const std::string& newName);
-    void setScore(const int scor);
+    void setScore(const int scor);*/
 };
 
 #endif //OOP_USER_H

@@ -4,11 +4,13 @@
 
 #include "User.h"
 
+#include <utility>
+
 std::ostream &operator<<(std::ostream &os, User &user) {
     os<< "Nume : " << user.name << "Scor : "<< user.score;
     return os;
 }
-std::string User::getName() const {
+/*std::string User::getName() const {
     return name;
 }
 
@@ -21,5 +23,5 @@ void User::setScore(const int scor) {
 void User::setName(const std::string &newName) {
     name = newName;
 }
-
-User::User(const std::string &playerName, int playerScore) : name{playerName}, score{playerScore}{}
+*/
+User::User(std::string playerName, int playerScore) : name{std::move(playerName)}, score{playerScore}{}

@@ -10,7 +10,7 @@
 class SecondException: public ExceptionBase {
 public:
      [[nodiscard]] const char* first() const noexcept override {
-        return "Variabila prea mica";
+        return "Nu respecta cerinta";
     }
 };
 

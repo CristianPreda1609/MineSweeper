@@ -13,11 +13,11 @@ private:
 public:
     MineCell(bool isPressed, bool isMine);
 
-    ~MineCell() = default;
+    ~MineCell() override = default;
 
     MineCell(const MineCell& other);
 
-    bool Press() const override;
+    [[nodiscard]] bool Press() const override;
 
     void pressCell()  override;
 

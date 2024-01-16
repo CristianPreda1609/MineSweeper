@@ -4,10 +4,6 @@
 
 #include "Player.h"
 
-std::ostream &operator<<(std::ostream &os, const Player &player) {
-    os << "Nume: " << player.name << ", Scor: " << player.score;
-    return os;
-}
 
 Player::Player( const std::string &playerName, int playerScore) : User(
         playerName, playerScore), name{playerName}, score{playerScore} {}
@@ -16,9 +12,9 @@ Player::Player( const std::string &playerName, int playerScore) : User(
     name = newName;
 }*/
 
-std::string Player::getName() const {
+/*std::string Player::getName() const {
     return name;
-}
+}*/
 
 /*int Player::getScore() {
     return score;

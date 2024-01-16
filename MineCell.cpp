@@ -4,7 +4,7 @@
 
 #include "MineCell.h"
 
-std::ostream &operator<<(std::ostream &os, [[maybe_unused]] MineCell &minecell) {
+std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const MineCell &minecell) {
             os << "*";
 
     return os;
@@ -33,5 +33,12 @@ MineCell &MineCell::operator=(const MineCell &other) {
         isMine = other.isMine;
     }
     return *this;
+}
+
+void swap(MineCell &first, MineCell &second) noexcept {
+    using std::swap;
+    swap(first.isPressed, second.isPressed);
+    swap(first.isMine, second.isMine);
+    swap(static_cast<Cell&>(first), static_cast<Cell&>(second));
 }
 

@@ -25,6 +25,7 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
 }
 
 void MinesweeperGame::placeMines() {
+    int ap = 2;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> rowDist(1, row - 1 );
@@ -36,8 +37,14 @@ void MinesweeperGame::placeMines() {
         int randomCol = colDist(gen);
 
         if (!table[randomRow][randomCol]->Mine() && table[randomRow][randomCol]->canBeModified()) {
-            delete table[randomRow][randomCol] ;
-            table[randomRow][randomCol] = new MineCell();
+            if(ap > 0){
+                delete table[randomRow][randomCol];
+                table[randomRow][randomCol] = new ResetMineCell();
+                ap--;
+            }else {
+                delete table[randomRow][randomCol];
+                table[randomRow][randomCol] = new MineCell();
+            }
         } else {
             --i;
         }
@@ -72,15 +79,17 @@ bool MinesweeperGame::pressCell(int r, int c) {
     isCell0();
     bool a = false;
     isMine(r,c);
-    if (getSit()) {
-        std::cout << "GAME OVER";
-        a = getSit();
-    } else if (isgameWon()) {
-        std::cout << "GAME WON";
-        a = isgameWon();
-    } else
-        revealZeroAdjacentCells(r, c);
-    return a;
+
+        if (getSit()) {
+            std::cout << "GAME OVER";
+            a = getSit();
+        } else if (isgameWon()) {
+            std::cout << "GAME WON";
+            a = isgameWon();
+        } else
+            revealZeroAdjacentCells(r, c);
+        return a;
+
 }
 
 void MinesweeperGame::isMine(int r, int c) {
@@ -109,7 +118,7 @@ std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
                     #ifdef _WIN32
                       SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
                     #endif
-                }else{
+                }else {
                 if (game.table[r][c]->Press()) {
                     os << game.table[r][c]->nrMine() << " ";
                 } else
@@ -199,7 +208,7 @@ void MinesweeperGame::isCell0() {
                 count++;
         }
     }
-    if(count == 0)
+    if(count == 0 )
         gameWon = true;
 }
 

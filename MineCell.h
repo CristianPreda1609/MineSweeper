@@ -5,6 +5,7 @@
 #ifndef OOP_MINECELL_H
 #define OOP_MINECELL_H
 #include "Cell.h"
+#include "MinesweeperGame.h"
 
 class MineCell : public Cell{
 private:
@@ -23,6 +24,7 @@ public:
 
     [[nodiscard]] bool Mine() const override;
     MineCell& operator=(const MineCell& other);
+    friend void swap(MineCell &first, MineCell &second) noexcept;
 
 };
 

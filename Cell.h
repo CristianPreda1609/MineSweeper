@@ -4,10 +4,8 @@
 
 #ifndef OOP_CELL_H
 #define OOP_CELL_H
-
 #include <iostream>
 #include <algorithm>
-
 class Cell {
 private:
     int nr_mine;
@@ -31,7 +29,7 @@ public:
 
     //void setMine();
 
-    void setNrMines(const int &NrMines);
+    virtual void setNrMines(const int &NrMines);
 
     [[nodiscard]] virtual bool Press() const;
 
@@ -39,7 +37,7 @@ public:
 
     [[nodiscard]] virtual bool Mine() const;
 
-    [[nodiscard]]  int nrMine() const;
+    [[nodiscard]]  virtual int nrMine() const;
 
     void modify(bool a);
 

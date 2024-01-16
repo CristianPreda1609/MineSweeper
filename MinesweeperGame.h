@@ -14,6 +14,7 @@
 #include "FlagCell.h"
 #include "MineCell.h"
 #include <type_traits>
+#include "ResetMineCell.h"
 #ifdef _WIN32
 #include <windows.h>
 #else

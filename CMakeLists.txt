@@ -128,6 +128,8 @@ add_executable(${PROJECT_NAME} main.cpp
         FirstException.h
         SecondException.cpp
         SecondException.h
+        ResetMineCell.cpp
+        ResetMineCell.h
 )
 
 ###############################################################################

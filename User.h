@@ -7,7 +7,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "libsodium/include/sodium.h"
 
 
 
@@ -28,7 +27,7 @@ public:
         swap(first.score, second.score);
     }
 
-    friend std::ostream &operator<<(std::ostream& os, const User& user) {
+    friend std::ostream &operator<<(std::ostream& os,  User& user) {
         os << "Name: " << user.name << ", Score: " << user.score;
         return os;
     }

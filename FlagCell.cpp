@@ -3,7 +3,7 @@
 //
 
 #include "FlagCell.h"
-std::ostream &operator<<(std::ostream &os, const FlagCell &flagcell) {
+std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flagcell) {
 #ifdef _WIN32
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 #else

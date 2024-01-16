@@ -37,7 +37,7 @@ void MinesweeperGame::placeMines() {
 
         if (!table[randomRow][randomCol]->Mine() && table[randomRow][randomCol]->canBeModified()) {
             delete table[randomRow][randomCol] ;
-            table[randomRow][randomCol] = new MineCell(false,true);
+            table[randomRow][randomCol] = new MineCell();
         } else {
             --i;
         }
@@ -101,7 +101,7 @@ std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
                     #ifdef _WIN32
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
                     #else
-                    cout << "\033[1;31mText rosu\033[0m" << endl;
+                    std::cout << "\033[1;31mText rosu\033[0m" << std::endl;
                     #endif
 
                       os << "? " ;

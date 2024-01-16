@@ -8,14 +8,14 @@
 
 class MineCell : public Cell{
 private:
-    bool isPressed, isMine;
+    bool isPressed, isMine{};
     friend std::ostream &operator<<(std::ostream &os, const MineCell &minecell);
 public:
-    MineCell(bool isPressed, bool isMine);
+    MineCell();
 
     ~MineCell() override = default;
 
-    MineCell(const MineCell& other);
+    [[maybe_unused]] MineCell(const MineCell& other);
 
     [[nodiscard]] bool Press() const override;
 

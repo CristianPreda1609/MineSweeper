@@ -5,5 +5,5 @@
 #include "ExceptionBase.h"
 
 [[maybe_unused]] const char *ExceptionBase::er() const noexcept {
-    return "Base";
+    return "Date incorecte";
 }

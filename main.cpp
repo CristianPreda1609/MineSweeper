@@ -8,7 +8,7 @@
 #include <string>
 #include "ExceptionRC.h"
 #include "ExceptionData.h"
-
+#include "ExceptionBase.h"
 #ifdef __linux__
 #include <X11/Xlib.h>
 #endif
@@ -63,16 +63,21 @@ try{
     std::cerr << "Eroare: " << e.what() << std::endl;
 }
     MinesweeperGame game(row, col, mines, nume, 0);
+try {
     std::cout << game;
     std::cout << "\r\n ";
     std::cout
             << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
 
     std::cin >> r >> c;
+    if (r < -1 || r == 0 || r > row) {
+        if (c < -1 || c == 0 || c > col)
+            throw ExceptionBase();
+    }
     if (r == -1 && c == -1) {
         std::cout << "\n Ati iesit \n";
-    }
-    if (!(r < 0 || c < 0)) {
+    } else {
+
 
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -81,9 +86,12 @@ try{
         game.startCell(r, c, ran);
         game.placeMines();
         game.countNearbyMines();
-        game.pressCell(r,c);
+        game.pressCell(r, c);
 
     }
+}catch(ExceptionBase& e) {
+    std::cerr << "Eroare :" << e.what() << std::endl;
+}
     while (true) {
         rlutil::cls();
         int numb;

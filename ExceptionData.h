@@ -8,7 +8,7 @@
 
 class ExceptionData : public ExceptionBase {
 public:
-    [[nodiscard]] const char* error() const noexcept override;
+    [[nodiscard]] const char* er() const noexcept override;
 };
 
 

@@ -4,6 +4,6 @@
 
 #include "ExceptionBase.h"
 
-const char *ExceptionBase::error() const noexcept {
+[[maybe_unused]] const char *ExceptionBase::er() const noexcept {
     return "Base";
 }

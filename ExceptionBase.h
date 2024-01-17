@@ -12,7 +12,7 @@
 
 class ExceptionBase : public std::exception {
 public:
-    [[nodiscard]] virtual const char* error() const noexcept;
+    [[maybe_unused]] [[nodiscard]] virtual const char* er() const noexcept;
 };
 
 #endif //OOP_EXCEPTIONBASE_H

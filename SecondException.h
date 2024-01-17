@@ -9,9 +9,7 @@
 
 class SecondException: public ExceptionBase {
 public:
-     [[nodiscard]] const char* first() const noexcept override {
-        return "Nu respecta cerinta";
-    }
+     [[nodiscard]] const char* first() const noexcept override;
 };
 
 

@@ -45,7 +45,6 @@ private:
 
     void isCell0 ();
 
-
 public:
     MinesweeperGame(int row_, int col_, int Mines_, const std::string& nume, int scor);
 

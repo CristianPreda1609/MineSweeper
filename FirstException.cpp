@@ -3,3 +3,7 @@
 //
 
 #include "FirstException.h"
+
+const char *FirstException::first() const noexcept {
+    return "Rand sau coloana invalide";
+}

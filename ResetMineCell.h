@@ -12,7 +12,8 @@ class ResetMineCell: public Cell {
 private:
     bool isPressed, isMine{};
     int nr_mine;
-
+    static std::random_device rd;
+    static std::mt19937 gen;
     friend std::ostream &operator<<(std::ostream &os, const ResetMineCell &minecell);
 public:
     ResetMineCell();
@@ -23,8 +24,10 @@ public:
     [[nodiscard]] bool Mine() const override;
     ResetMineCell& operator=(const ResetMineCell& other);
     friend void swap(ResetMineCell &first, ResetMineCell &second) noexcept;
-     void setNrMines(const int &NrMines) override;
+    void setNrMines(const int &NrMines) override;
     [[nodiscard]]  int nrMine() const override;
+    static int genrandmine();
+    static int genrandnr();
 
 };
 

@@ -10,9 +10,7 @@
 
 class FirstException : public ExceptionBase {
 public:
-    [[nodiscard]] const char* first() const noexcept override  {
-        return "Rand sau coloana invalide";
-    }
+    [[nodiscard]] const char* first() const noexcept override;
 };
 
 

@@ -4,6 +4,7 @@
 
 #include "MinesweeperGame.h"
 
+
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume, int scor )
         : row{row_}, col{col_}, Mines{Mines_}, table(row_),
           player( nume, scor), gameOver(false), gameWon(false) {
@@ -23,6 +24,7 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
     }
 
 }
+
 
 void MinesweeperGame::placeMines() {
     int ap = 2;
@@ -201,6 +203,7 @@ bool MinesweeperGame::isgameWon() const {
 
 void MinesweeperGame::isCell0() {
     int count = 0;
+
     for (int r = 1; r < row; r++) {
         for (int c = 1; c < col; c++) {
 
@@ -208,9 +211,11 @@ void MinesweeperGame::isCell0() {
                 count++;
         }
     }
-    if(count == 0 )
+    if(count == row*col-Mines )
         gameWon = true;
 }
+
+
 
 
 

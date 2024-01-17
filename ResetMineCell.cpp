@@ -2,7 +2,11 @@
 // Created by Cristi on 1/16/2024.
 //
 
+
 #include "ResetMineCell.h"
+
+std::random_device ResetMineCell::rd;
+std::mt19937 ResetMineCell::gen(ResetMineCell::rd());
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const ResetMineCell &minecell) {
     os << "*";
 
@@ -20,11 +24,7 @@ void ResetMineCell::pressCell() {
 }
 
 bool ResetMineCell::Mine() const {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> rand(0, 1 );
-    int randd = rand(gen);
-   return randd;
+   return genrandmine();
 }
 ResetMineCell &ResetMineCell::operator=(const ResetMineCell &other) {
     if (this != &other) {
@@ -43,12 +43,20 @@ void swap(ResetMineCell &first, ResetMineCell &second) noexcept {
 }
 void ResetMineCell::setNrMines(const int &NrMines) {
     nr_mine = NrMines;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> rand(4, 8 );
-    nr_mine = rand(gen);
+    nr_mine = genrandnr();
 }
 int ResetMineCell::nrMine() const {
 
     return nr_mine;
+}
+int ResetMineCell::genrandmine() {
+
+    std::uniform_int_distribution<int> rand(0, 1 );
+    return rand(gen);
+}
+
+int ResetMineCell::genrandnr() {
+
+    std::uniform_int_distribution<int> rand(4, 8 );
+    return rand(gen);
 }

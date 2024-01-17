@@ -6,8 +6,8 @@
 #include "MinesweeperGame.h"
 #include <rlutil.h>
 #include <string>
-#include "FirstException.h"
-#include "SecondException.h"
+#include "ExceptionRC.h"
+#include "ExceptionData.h"
 
 #ifdef __linux__
 #include <X11/Xlib.h>
@@ -30,7 +30,7 @@ void startGame() {
     int cho, r, c;
     std::cin >> cho;
     if(cho <1 || cho>3){
-        throw SecondException();
+        throw ExceptionData();
     }
     int row = 0;
     int col = 0;
@@ -59,7 +59,7 @@ try{
             std::cout<<"Valoare incorecta!";
             break;
         }
-    }} catch (const SecondException& e){
+    }} catch (const ExceptionData& e){
     std::cerr << "Eroare: " << e.what() << std::endl;
 }
     MinesweeperGame game(row, col, mines, nume, 0);
@@ -101,7 +101,7 @@ try{
                 std::cin >> r >> c;
                 if (r < -1 || r == 0 || r > row) {
                     if (c < -1 || c == 0 || c > col)
-                        throw FirstException();
+                        throw ExceptionRC();
                 }
 
                 if (r == -1 && c == -1) {
@@ -142,7 +142,7 @@ try{
 
                 }
             }
-        }catch (FirstException& e){
+        }catch (ExceptionRC& e){
             std::cerr << "Eroare :" << e.what()<< std::endl;
         }
     }

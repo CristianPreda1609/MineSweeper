@@ -4,6 +4,6 @@
 
 #include "ExceptionBase.h"
 
-const char *ExceptionBase::first() const noexcept {
+const char *ExceptionBase::error() const noexcept {
     return "Base";
 }

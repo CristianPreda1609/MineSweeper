@@ -4,17 +4,12 @@
 
 #include "FlagCell.h"
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flagcell) {
-#ifdef _WIN32
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-#else
-    std::cout << "\033[1;31mText rosu\033[0m" << std::endl;
-#endif
+    rlutil::setColor(rlutil::RED);
 
     os << "?" ;
 
-#ifdef _WIN32
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-#endif
+    rlutil::resetColor();
+    rlutil::setColor(rlutil::WHITE);
 
 
         return os;

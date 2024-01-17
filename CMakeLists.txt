@@ -124,12 +124,12 @@ add_executable(${PROJECT_NAME} main.cpp
         FlagCell.h
         ExceptionBase.cpp
         ExceptionBase.h
-        FirstException.cpp
-        FirstException.h
-        SecondException.cpp
-        SecondException.h
         ResetMineCell.cpp
         ResetMineCell.h
+        ExceptionRC.cpp
+        ExceptionRC.h
+        ExceptionData.cpp
+        ExceptionData.h
 )
 
 ###############################################################################

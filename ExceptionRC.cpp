@@ -4,6 +4,6 @@
 
 #include "ExceptionRC.h"
 
-const char *ExceptionRC::er() const noexcept {
+const char *ExceptionRC::first() const noexcept {
     return "Rand sau coloana invalide";
 }

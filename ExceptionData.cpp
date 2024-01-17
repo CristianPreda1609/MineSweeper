@@ -4,6 +4,6 @@
 
 #include "ExceptionData.h"
 
-const char *ExceptionData::er() const noexcept {
+const char *ExceptionData::first() const noexcept {
     return "Nu respecta cerinta";
 }

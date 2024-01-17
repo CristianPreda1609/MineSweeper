@@ -4,6 +4,6 @@
 
 #include "ExceptionBase.h"
 
-[[maybe_unused]] const char *ExceptionBase::er() const noexcept {
+[[maybe_unused]] const char *ExceptionBase::first() const noexcept {
     return "Date incorecte";
 }

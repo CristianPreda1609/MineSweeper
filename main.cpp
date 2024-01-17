@@ -8,7 +8,7 @@
 #include <string>
 #include "ExceptionRC.h"
 #include "ExceptionData.h"
-#include "ExceptionBase.h"
+
 #ifdef __linux__
 #include <X11/Xlib.h>
 #endif
@@ -63,35 +63,35 @@ try{
     std::cerr << "Eroare: " << e.what() << std::endl;
 }
     MinesweeperGame game(row, col, mines, nume, 0);
-try {
     std::cout << game;
     std::cout << "\r\n ";
-    std::cout
-            << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
+    try {
+        std::cout
+                << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
 
-    std::cin >> r >> c;
-    if (r < -1 || r == 0 || r > row) {
-        if (c < -1 || c == 0 || c > col)
-            throw ExceptionBase();
+        std::cin >> r >> c;
+        if (r < -1 || r == 0 || r > row) {
+            if (c < -1 || c == 0 || c > col)
+                throw ExceptionRC();
+        }
+        if (r == -1 && c == -1) {
+            std::cout << "\n Ati iesit \n";
+        }
+        if (!(r < 0 || c < 0)) {
+
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> rann(4, 10);
+            int ran = rann(gen);
+            game.startCell(r, c, ran);
+            game.placeMines();
+            game.countNearbyMines();
+            game.pressCell(r, c);
+
+        }
+    }catch (ExceptionRC& e){
+        std::cerr << "Eroare :" << e.what()<< std::endl;
     }
-    if (r == -1 && c == -1) {
-        std::cout << "\n Ati iesit \n";
-    } else {
-
-
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> rann(4, 10);
-        int ran = rann(gen);
-        game.startCell(r, c, ran);
-        game.placeMines();
-        game.countNearbyMines();
-        game.pressCell(r, c);
-
-    }
-}catch(ExceptionBase& e) {
-    std::cerr << "Eroare :" << e.what() << std::endl;
-}
     while (true) {
         rlutil::cls();
         int numb;

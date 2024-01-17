@@ -8,7 +8,7 @@
 
 class ExceptionRC : public ExceptionBase {
 public:
-    [[nodiscard]] const char* er() const noexcept override;
+    [[nodiscard]] const char* first() const noexcept override;
 };
 
 

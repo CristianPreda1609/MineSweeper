@@ -12,7 +12,7 @@
 
 
 class User {
-protected:
+private:
      std::string name;
     int score, r,c;
 

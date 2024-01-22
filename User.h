@@ -33,7 +33,7 @@ public:
         return *this;
     }
     virtual void calculateScore( int coef);
-    virtual int getScore();
+    //virtual int getScore();
     /* virtual std::string getName() const;
 
      void setName(const std::string& newName);

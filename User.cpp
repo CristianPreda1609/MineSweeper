@@ -22,9 +22,9 @@ void User::setName(const std::string &newName) {
     name = newName;
 }
 */
-int User::getScore() {
+/*int User::getScore() {
     return score;
-}
+}*/
 User::User(std::string playerName, int  r, int c) : name{std::move(playerName)}, score{0}, r(r), c(c){}
 
 void User::calculateScore(int coef) {

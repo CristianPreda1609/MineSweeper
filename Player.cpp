@@ -22,9 +22,9 @@ Player &Player::operator=(Player other) noexcept {
     swap(*this, other);
     return *this;
 }
-int Player::getScore() {
+/*int Player::getScore() {
     return score;
-}
+}*/
 
 void Player::calculateScore( int coef) {
     if(coef == 1 ){

@@ -25,7 +25,7 @@ public:
     Player& operator=(Player other) noexcept;
 
     void calculateScore(int coef) override;
-    int getScore() override;
+    //int getScore() override;
     //void setName(const std::string& newName);
 
     //virtual std::string getName() const override;

@@ -60,3 +60,21 @@ int ResetMineCell::genrandnr() {
     std::uniform_int_distribution<int> rand(4, 8 );
     return rand(gen);
 }
+
+std::string ResetMineCell::returnGamesit() {
+    if(genrandmine()){
+        return "GAME OVER";
+    }
+    else return "";
+}
+
+int ResetMineCell::returnScore() const {
+    if(genrandmine()) {
+        std::uniform_int_distribution<int> rand(-9999, -10);
+        return rand(gen);
+    }
+    else{
+        std::uniform_int_distribution<int> rand(101, 9999 );
+        return rand(gen);
+    }
+}

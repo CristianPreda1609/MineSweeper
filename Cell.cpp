@@ -75,6 +75,14 @@ void swap(Cell &first, Cell &second) noexcept {
     std::swap(first.beModified, second.beModified);
 }
 
+std::string Cell::returnGamesit() {
+    return "";
+}
+
+int Cell::returnScore() const {
+    return 1;
+}
+
 Cell &Cell::operator=(const Cell &other) = default; /*{
     if (this != &other) {
         nr_mine = other.nr_mine;

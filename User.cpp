@@ -7,16 +7,14 @@
 #include <utility>
 
 std::ostream &operator<<(std::ostream &os, const User &user) {
-    os<< "Nume : " << user.name << "Scor : "<< user.score;
+    os<< "Nume : " << user.name << "Scor : "<< user.score<<"\n";
     return os;
 }
 /*std::string User::getName() const {
     return name;
 }
 
-int User::getScore() {
-    return score;
-}
+
 void User::setScore(const int scor) {
     score = scor;
 }
@@ -24,4 +22,11 @@ void User::setName(const std::string &newName) {
     name = newName;
 }
 */
-User::User(std::string playerName, int playerScore) : name{std::move(playerName)}, score{playerScore}{}
+int User::getScore() {
+    return score;
+}
+User::User(std::string playerName, int  r, int c) : name{std::move(playerName)}, score{0}, r(r), c(c){}
+
+void User::calculateScore(int coef) {
+    score += coef*r*c;
+}

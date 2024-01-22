@@ -62,7 +62,7 @@ try{
     }} catch (const ExceptionData& e){
     std::cerr << "Eroare: " << e.what() << std::endl;
 }
-    MinesweeperGame game(row, col, mines, nume, 0);
+    MinesweeperGame game(row, col, mines, nume);
     std::cout << game;
     std::cout << "\r\n ";
     try {
@@ -94,6 +94,7 @@ try{
     }
     while (true) {
         rlutil::cls();
+        game.afisarePlayer();
         int numb;
         std::cout << game;
         std::cout << "\r";

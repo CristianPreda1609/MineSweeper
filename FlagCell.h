@@ -20,7 +20,7 @@ private:
     friend std::ostream &operator<<(std::ostream &os, const FlagCell &flagcell);
 public:
     FlagCell(bool isMine, int nr_mine);
-    ~FlagCell() = default;
+    ~FlagCell() override = default;
     friend void swap(FlagCell& first, FlagCell& other);
     FlagCell& operator=(const FlagCell& other);
 

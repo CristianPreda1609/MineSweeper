@@ -7,19 +7,20 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <utility>
 
 
 
 class User {
-private:
+protected:
      std::string name;
-    int score;
+    int score, r,c;
 
    friend std::ostream &operator<<(std::ostream &os, const User &user);
 
 public:
 
-    User(std::string  playerName, int playerScore);
+    explicit User(std::string  playerName,int  r,int c);
     virtual ~User() = default;
     static void swap(User& first, User& second) noexcept {
         using std::swap;
@@ -31,8 +32,10 @@ public:
         swap(*this, other);
         return *this;
     }
+    virtual void calculateScore( int coef);
+    virtual int getScore();
     /* virtual std::string getName() const;
-     int getScore();
+
      void setName(const std::string& newName);
      void setScore(const int scor);*/
 };

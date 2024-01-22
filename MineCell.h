@@ -25,6 +25,8 @@ public:
     [[nodiscard]] bool Mine() const override;
     MineCell& operator=(const MineCell& other);
     friend void swap(MineCell &first, MineCell &second) noexcept;
+    std::string returnGamesit() override;
+    [[nodiscard]] int returnScore() const override;
 
 };
 

@@ -28,6 +28,9 @@ public:
     [[nodiscard]]  int nrMine() const override;
     static int genrandmine();
     static int genrandnr();
+    std::string returnGamesit() override;
+    [[nodiscard]] int returnScore() const override;
+
 
 };
 

@@ -5,9 +5,9 @@
 #include "MinesweeperGame.h"
 
 
-MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume, int scor )
+MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume)
         : row{row_}, col{col_}, Mines{Mines_}, table(row_),
-          player( nume, scor), gameOver(false), gameWon(false) {
+          player( nume,row,col), gameWon(false) {
 
     for (int r = 0; r < row; r++) {
         table.push_back({});
@@ -80,11 +80,13 @@ bool MinesweeperGame::pressCell(int r, int c) {
         return false;
     isCell0();
     bool a = false;
-    isMine(r,c);
 
-        if (getSit()) {
-            std::cout << "GAME OVER";
-            a = getSit();
+        player.calculateScore(table[r][c]->returnScore());
+        writePlayer();
+
+        if (!table[r][c]->returnGamesit().empty()) {
+            std::cout << table[r][c]->returnGamesit();
+            a = true;
         } else if (isgameWon()) {
             std::cout << "GAME WON";
             a = isgameWon();
@@ -94,14 +96,7 @@ bool MinesweeperGame::pressCell(int r, int c) {
 
 }
 
-void MinesweeperGame::isMine(int r, int c) {
-    if (table[r][c]->Mine())
-        gameOver = true;
-}
 
-bool MinesweeperGame::getSit() const {
-    return gameOver;
-}
 
 std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
     for (int r = 0; r < game.row; r++) {
@@ -186,9 +181,9 @@ void MinesweeperGame::startCell(int r, int c, int ran) {
     return player.getName();
 }*/
 
-/*void MinesweeperGame::afisarePlayer() {
+void MinesweeperGame::afisarePlayer() {
     std::cout<<player;
-}*/
+}
 
 
 
@@ -208,6 +203,24 @@ void MinesweeperGame::isCell0() {
     }
     if(count == row*col-Mines )
         gameWon = true;
+}
+
+void MinesweeperGame::flagg(int r, int c) {
+    int nr_mine;
+    bool ismine;
+    nr_mine = table[r][c]->nrMine();
+    ismine = table[r][c]->Mine();
+    delete table[r][c];
+    table[r][c] = new FlagCell(ismine,nr_mine);
+}
+
+void MinesweeperGame::unflag(int r, int c) {
+    int nr_mine;
+    bool ismine;
+    nr_mine = table[r][c]->nrMine();
+    ismine = table[r][c]->Mine();
+    delete table[r][c];
+    table[r][c] = new Cell(false, ismine, nr_mine, true);
 }
 
 

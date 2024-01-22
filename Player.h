@@ -11,39 +11,34 @@
 class Player : public User {
 private:
     std::string name;
-    int score;
+    int score, r,c ;
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
 
 public:
-    Player( const std::string &playerName, int playerScore);
+    explicit Player( const std::string &playerName, int  r,int c);
     ~Player() override = default;
-    static void swap(Player& first, Player& second) noexcept {
-        using std::swap;
-        swap(static_cast<User&>(first), static_cast<User&>(second));
-        swap(first.name, second.name);
-        swap(first.score, second.score);
-    }
+    static void swap(Player& first, Player& second) noexcept;
 
 
-    friend std::ostream &operator<<(std::ostream &os, const Player &player) {
-        os << "Nume: " << player.name << ", Scor: " << player.score;
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const Player &player);
 
-    Player& operator=(Player other) noexcept {
-        swap(*this, other);
-        return *this;
-    }
+    Player& operator=(Player other) noexcept;
 
+    void calculateScore(int coef) override;
+    int getScore() override;
     //void setName(const std::string& newName);
 
     //virtual std::string getName() const override;
 
    // void setScore(const int scor);
 
-   // int getScore();
+
 
 
 
 };
+
+
+
+
 #endif //OOP_PLAYER_H

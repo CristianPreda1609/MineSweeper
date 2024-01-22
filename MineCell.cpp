@@ -42,3 +42,10 @@ void swap(MineCell &first, MineCell &second) noexcept {
     swap(static_cast<Cell&>(first), static_cast<Cell&>(second));
 }
 
+std::string MineCell::returnGamesit() {
+    return "GAME OVER";
+}
+
+int MineCell::returnScore() const {
+    return -20;
+}

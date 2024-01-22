@@ -41,7 +41,11 @@ public:
 
     void modify(bool a);
 
+    virtual std::string returnGamesit();
+
     [[nodiscard]] bool canBeModified() const;
+
+    [[nodiscard]] virtual int returnScore() const;
 
 
 

@@ -3,7 +3,7 @@
 //
 
 #include "MineCell.h"
-
+#include "MinesweeperGame.h"
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const MineCell &minecell) {
             os << "*";
 

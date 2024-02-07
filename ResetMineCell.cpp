@@ -4,7 +4,7 @@
 
 
 #include "ResetMineCell.h"
-
+#include "MinesweeperGame.h"
 std::random_device ResetMineCell::rd;
 std::mt19937 ResetMineCell::gen(ResetMineCell::rd());
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const ResetMineCell &minecell) {

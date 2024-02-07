@@ -3,7 +3,7 @@
 //
 
 #include "Cell.h"
-
+#include "MinesweeperGame.h"
 Cell::Cell(bool isPressed, bool isMine, int nr_mine, bool beModified)
         : nr_mine(nr_mine), isPressed(isPressed), isMine(isMine), beModified(beModified) {
 }

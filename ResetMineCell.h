@@ -7,7 +7,6 @@
 #include "Cell.h"
 #include <random>
 #include <iostream>
-#include "MinesweeperGame.h"
 
 class ResetMineCell: public Cell {
 private:

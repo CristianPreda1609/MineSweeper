@@ -5,7 +5,6 @@
 #ifndef OOP_MINECELL_H
 #define OOP_MINECELL_H
 #include "Cell.h"
-#include "MinesweeperGame.h"
 
 class MineCell : public Cell{
 private:

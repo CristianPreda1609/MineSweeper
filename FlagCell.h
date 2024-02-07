@@ -7,12 +7,6 @@
 
 #include "Cell.h"
 #include <rlutil.h>
-#include "MinesweeperGame.h"
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
 
 class FlagCell : public Cell{
 private:

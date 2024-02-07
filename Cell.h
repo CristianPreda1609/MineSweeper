@@ -6,10 +6,11 @@
 #define OOP_CELL_H
 #include <iostream>
 #include <algorithm>
-#include "MinesweeperGame.h"
+
+class MinesweeperGame {
+};
 class Cell {
 private:
-    MinesweeperGame *obj;
     int nr_mine;
     bool isPressed, isMine, beModified;
     friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
@@ -35,7 +36,7 @@ public:
 
     [[nodiscard]] virtual bool Press() const;
 
-    virtual void pressCell(MinesweeperGame &obj, int r, int c);
+    virtual void pressCell(MinesweeperGame *obj, int r, int c);
 
     [[nodiscard]] virtual bool Mine() const;
 

@@ -7,6 +7,7 @@
 #include "Cell.h"
 #include <random>
 #include <iostream>
+#include "MinesweeperGame.h"
 
 class ResetMineCell: public Cell {
 private:
@@ -20,7 +21,8 @@ public:
     ~ResetMineCell() override = default;
 
     [[nodiscard]] bool Press() const override;
-    void pressCell()  override;
+
+    void pressCell(MinesweeperGame &obj, int r, int c) override;
     [[nodiscard]] bool Mine() const override;
     ResetMineCell& operator=(const ResetMineCell& other);
     friend void swap(ResetMineCell &first, ResetMineCell &second) noexcept;

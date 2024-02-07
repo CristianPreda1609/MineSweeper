@@ -7,6 +7,7 @@
 
 #include "Cell.h"
 #include <rlutil.h>
+#include "MinesweeperGame.h"
 #ifdef _WIN32
 #include <windows.h>
 #else
@@ -15,6 +16,7 @@
 
 class FlagCell : public Cell{
 private:
+    MinesweeperGame &obj;
     bool isMine, isFlagged = true;
     int nr_mine;
     friend std::ostream &operator<<(std::ostream &os, const FlagCell &flagcell);

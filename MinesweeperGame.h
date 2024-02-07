@@ -29,11 +29,10 @@ private:
     int row;
     int col;
     int Mines;
-    std::vector<std::vector<Cell*>> table;
+
     Player player;
     bool gameWon;
 
-    void revealZeroAdjacentCells(int r, int c);
 
 
     friend std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game);
@@ -43,6 +42,9 @@ private:
     void isCell0 ();
 
 public:
+    std::vector<std::vector<Cell *>> table;
+
+    void revealZeroAdjacentCells(int r, int c);
     void writePlayer() const {
         std::ofstream outputFile("ScoreTable.txt");
 

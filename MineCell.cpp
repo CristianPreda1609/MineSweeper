@@ -10,13 +10,23 @@ std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const MineCell &mine
     return os;
 }
 
-MineCell::MineCell() : Cell(false, true, 0, true), isPressed(false), isMine(true) {}
+MineCell::MineCell() : Cell(false, true, 1, true), isPressed(false), isMine(true) {}
 
 bool MineCell::Press() const {
     return isPressed;
 }
 
-void MineCell::pressCell() {
+void MineCell::pressCell(MinesweeperGame &obj, int r, int c) {
+    if (obj.table[r][c]->nrMine() == 0) {
+        obj.revealZeroAdjacentCells(r + 1, c + 1);
+        obj.revealZeroAdjacentCells(r, c + 1);
+        obj.revealZeroAdjacentCells(r, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c - 1);
+        obj.revealZeroAdjacentCells(r - 1, c + 1);
+    }
     isPressed = true;
 }
 

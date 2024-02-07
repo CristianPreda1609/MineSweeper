@@ -45,10 +45,19 @@ bool Cell::Press() const {
 }
 
 
-void Cell::pressCell() {
+void Cell::pressCell(MinesweeperGame &obj, int r, int c) {
 
+    if (obj.table[r][c]->nrMine() == 0) {
+        obj.revealZeroAdjacentCells(r + 1, c + 1);
+        obj.revealZeroAdjacentCells(r, c + 1);
+        obj.revealZeroAdjacentCells(r, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c - 1);
+        obj.revealZeroAdjacentCells(r - 1, c + 1);
+    }
     isPressed = true;
-
 }
 
 bool Cell::Mine() const {

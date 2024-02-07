@@ -18,7 +18,18 @@ ResetMineCell:: ResetMineCell(): Cell(false, true, 0, true), isPressed(false), i
 bool ResetMineCell::Press() const {
     return isPressed;
 }
-void ResetMineCell::pressCell() {
+
+void ResetMineCell::pressCell(MinesweeperGame &obj, int r, int c) {
+    if (obj.table[r][c]->nrMine() == 0) {
+        obj.revealZeroAdjacentCells(r + 1, c + 1);
+        obj.revealZeroAdjacentCells(r, c + 1);
+        obj.revealZeroAdjacentCells(r, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c);
+        obj.revealZeroAdjacentCells(r - 1, c - 1);
+        obj.revealZeroAdjacentCells(r + 1, c - 1);
+        obj.revealZeroAdjacentCells(r - 1, c + 1);
+    }
     isPressed = true;
 
 }

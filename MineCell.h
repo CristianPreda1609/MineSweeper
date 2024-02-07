@@ -9,6 +9,7 @@
 
 class MineCell : public Cell{
 private:
+    MinesweeperGame &obj;
     bool isPressed, isMine{};
     friend std::ostream &operator<<(std::ostream &os, const MineCell &minecell);
 public:
@@ -20,7 +21,7 @@ public:
 
     [[nodiscard]] bool Press() const override;
 
-    void pressCell()  override;
+    void pressCell(MinesweeperGame &obj, int r, int c) override;
 
     [[nodiscard]] bool Mine() const override;
     MineCell& operator=(const MineCell& other);

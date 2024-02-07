@@ -60,8 +60,8 @@ void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
         return;
     }
 
-    table[r][c]->pressCell();
-    if(table[r][c]->nrMine() == 0) {
+    table[r][c]->pressCell(*this, r, c);
+    /*if(table[r][c]->nrMine() == 0) {
         revealZeroAdjacentCells(r+1, c + 1);
         revealZeroAdjacentCells(r, c + 1);
         revealZeroAdjacentCells(r, c - 1);
@@ -71,24 +71,24 @@ void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
         revealZeroAdjacentCells(r + 1, c-1);
         revealZeroAdjacentCells(r -1 , c+1);
     }
+    */
 }
 
 
-
 bool MinesweeperGame::pressCell(int r, int c) {
-    if(table[r][c]->Press())
+    if (table[r][c]->Press())
         return false;
     isCell0();
     bool a = false;
 
-        player.calculateScore(table[r][c]->returnScore());
-        writePlayer();
+    player.calculateScore(table[r][c]->returnScore());
+    writePlayer();
 
-        if (!table[r][c]->returnGamesit().empty()) {
-            std::cout << table[r][c]->returnGamesit();
-            a = true;
-        } else if (isgameWon()) {
-            std::cout << "GAME WON";
+    if (!table[r][c]->returnGamesit().empty()) {
+        std::cout << table[r][c]->returnGamesit();
+        a = true;
+    } else if (isgameWon()) {
+        std::cout << "GAME WON";
             a = isgameWon();
         } else
             revealZeroAdjacentCells(r, c);

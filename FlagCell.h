@@ -10,7 +10,6 @@
 
 class FlagCell : public Cell{
 private:
-    MinesweeperGame &obj;
     bool isMine, isFlagged = true;
     int nr_mine;
     friend std::ostream &operator<<(std::ostream &os, const FlagCell &flagcell);

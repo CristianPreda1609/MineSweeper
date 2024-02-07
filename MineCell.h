@@ -8,7 +8,6 @@
 
 class MineCell : public Cell{
 private:
-    MinesweeperGame &obj;
     bool isPressed, isMine{};
     friend std::ostream &operator<<(std::ostream &os, const MineCell &minecell);
 public:

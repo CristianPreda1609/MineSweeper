@@ -3,6 +3,7 @@
 //
 
 #include "FlagCell.h"
+#include "MinesweeperGame.h"
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flagcell) {
     rlutil::setColor(rlutil::RED);
 

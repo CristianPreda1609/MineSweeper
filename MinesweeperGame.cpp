@@ -9,11 +9,11 @@
 
 
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume)
-        : row{row_}, col{col_}, Mines{Mines_}, table(row_),
-          player( nume,row,col), gameWon(false) {
+        : row{row_}, col{col_}, Mines{Mines_}, player(nume, row, col),
+          gameWon(false), table(row_) {
 
     for (int r = 0; r < row; r++) {
-        table.push_back({});
+        table.emplace_back();
         for (int c = 0; c < col; c++) {
             table[r].push_back(new Cell(false, false, 0, true));
             if (table[r][c] == nullptr)
@@ -22,11 +22,13 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
     }
 
     for (int c = 1; c < col; c++) {
+        delete table[0][c];
         table[0][c] =  new Cell(false, false, c, true);
         if (table[0][c] == nullptr)
             throw ExceptionTable();
     }
     for (int r = 1; r < row; r++) {
+        delete table[r][0];
         table[r][0] = new Cell(false, false, r, true);
         if (table[r][0] == nullptr)
             throw ExceptionTable();

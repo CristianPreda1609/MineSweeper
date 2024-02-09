@@ -3,6 +3,9 @@
 //
 
 #include "MinesweeperGame.h"
+#include "ResetMineCell.h"
+#include "MineCell.h"
+#include "FlagCell.h"
 
 
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume)

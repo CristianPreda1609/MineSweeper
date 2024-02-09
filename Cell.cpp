@@ -48,14 +48,14 @@ bool Cell::Press() const {
 void Cell::pressCell(MinesweeperGame &obj, int r, int c) {
 
     if (obj.table[r][c]->nrMine() == 0) {
-        obj.revealZeroAdjacentCells(r + 1, c + 1);
-        obj.revealZeroAdjacentCells(r, c + 1);
-        obj.revealZeroAdjacentCells(r, c - 1);
-        obj.revealZeroAdjacentCells(r + 1, c);
-        obj.revealZeroAdjacentCells(r - 1, c);
-        obj.revealZeroAdjacentCells(r - 1, c - 1);
-        obj.revealZeroAdjacentCells(r + 1, c - 1);
-        obj.revealZeroAdjacentCells(r - 1, c + 1);
+        obj.table[r + 1][c + 1]->pressCell(obj, r + 1, c + 1);
+        obj.table[r][c + 1]->pressCell(obj, r, c + 1);
+        obj.table[r][c - 1]->pressCell(obj, r, c - 1);
+        obj.table[r + 1][c]->pressCell(obj, r + 1, c);
+        obj.table[r - 1][c]->pressCell(obj, r - 1, c);
+        obj.table[r - 1][c - 1]->pressCell(obj, r - 1, c - 1);
+        obj.table[r + 1][c - 1]->pressCell(obj, r + 1, c - 1);
+        obj.table[r - 1][c + 1]->pressCell(obj, r - 1, c + 1);
     }
     isPressed = true;
 }

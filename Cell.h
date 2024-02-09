@@ -7,8 +7,7 @@
 #include <iostream>
 #include <algorithm>
 
-class MinesweeperGame {
-};
+class MinesweeperGame;
 class Cell {
 private:
     int nr_mine;
@@ -36,7 +35,7 @@ public:
 
     [[nodiscard]] virtual bool Press() const;
 
-    virtual void pressCell(MinesweeperGame *obj, int r, int c);
+    virtual void pressCell(MinesweeperGame &obj, int r, int c);
 
     [[nodiscard]] virtual bool Mine() const;
 

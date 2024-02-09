@@ -11,10 +11,7 @@
 #include <random>
 #include "rlutil.h"
 #include "Player.h"
-#include "FlagCell.h"
-#include "MineCell.h"
 #include <type_traits>
-#include "ResetMineCell.h"
 #include <fstream>
 #ifdef _WIN32
 #include <windows.h>

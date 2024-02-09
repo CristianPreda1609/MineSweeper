@@ -28,7 +28,7 @@ void startGame() {
     std::cout
             << "Salut " << nume
             << "\nAlege Nivelul:\n 1.Incepator (Matrice 9x9 cu 10 mine) \n 2.Intermediar (Matrice 16x16 cu 40 de mine)\n 3.Expert (Matrice 16x30 cu 99 de mine)\r\n";
-    int cho, r, c;
+    int cho;
     std::cin >> cho;
     if (cho < 1 || cho > 3) {
         throw ExceptionData();
@@ -69,7 +69,7 @@ void startGame() {
         try {
             std::cout
                     << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";
-
+            int r, c;
             std::cin >> r >> c;
             if (r < -1 || r == 0 || r > row) {
                 if (c < -1 || c == 0 || c > col)
@@ -105,6 +105,7 @@ void startGame() {
                     << "Introduceti 1 daca dorit sa apasati o celula, 2 daca doriti sa puneti un steag pe celula sau 3 pentru a lua steagul de pe o celula: ";
             std::cin >> numb;
             try {
+                int r, c;
                 if (numb == 1) {
                     std::cout
                             << "Introduceti coordonatele patratului pe care vreti sa il apasati(Rand si apoi coloana) sau -1 -1 pentru a iesi:";

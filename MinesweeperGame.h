@@ -12,6 +12,7 @@
 #include "rlutil.h"
 #include "Player.h"
 #include <type_traits>
+#include "ExceptionTable.h"
 #include <fstream>
 #ifdef _WIN32
 #include <windows.h>

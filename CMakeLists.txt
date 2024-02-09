@@ -130,6 +130,7 @@ add_executable(${PROJECT_NAME} main.cpp
         ExceptionRC.h
         ExceptionData.cpp
         ExceptionData.h
+        ExceptionTable.h
 )
 
 ###############################################################################

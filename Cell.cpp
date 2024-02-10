@@ -46,22 +46,31 @@ bool Cell::Press() const {
 
 
 void Cell::pressCell(MinesweeperGame &obj, int r, int c) {
-    std::cout << "this : " << obj << "r : " << r << "c : " << c;
     if (r < 1 || r >= obj.getRow() || c < 1 || c >= obj.getCol() || obj.table[r][c]->Press() ||
         obj.table[r][c]->Mine()) {
 
         return;
     }
-    if (obj.table[r][c]->nrMine() == 0 && !isPressed) {
-        obj.table[r + 1][c + 1]->pressCell(obj, r + 1, c + 1);
-        obj.table[r][c + 1]->pressCell(obj, r, c + 1);
-        obj.table[r][c - 1]->pressCell(obj, r, c - 1);
-        obj.table[r + 1][c]->pressCell(obj, r + 1, c);
-        obj.table[r - 1][c]->pressCell(obj, r - 1, c);
-        obj.table[r - 1][c - 1]->pressCell(obj, r - 1, c - 1);
-        obj.table[r + 1][c - 1]->pressCell(obj, r + 1, c - 1);
-        obj.table[r - 1][c + 1]->pressCell(obj, r - 1, c + 1);
-        isPressed = true;
+    isPressed = true;
+    if (obj.table[r][c]->nrMine() == 0) {
+
+        if (r + 1 < obj.getRow() && c + 1 < obj.getCol())
+            obj.table[r + 1][c + 1]->pressCell(obj, r + 1, c + 1);
+        if (c + 1 < obj.getCol())
+            obj.table[r][c + 1]->pressCell(obj, r, c + 1);
+        if (c - 1 > 0)
+            obj.table[r][c - 1]->pressCell(obj, r, c - 1);
+        if (r + 1 < obj.getCol())
+            obj.table[r + 1][c]->pressCell(obj, r + 1, c);
+        if (r - 1 > 0)
+            obj.table[r - 1][c]->pressCell(obj, r - 1, c);
+        if (r - 1 > 0 && c - 1 > 0)
+            obj.table[r - 1][c - 1]->pressCell(obj, r - 1, c - 1);
+        if (r + 1 < obj.getRow() && c - 1 > 0)
+            obj.table[r + 1][c - 1]->pressCell(obj, r + 1, c - 1);
+        if (r - 1 > 0 && c + 1 > obj.getCol())
+            obj.table[r - 1][c + 1]->pressCell(obj, r - 1, c + 1);
+
     }
 
 }

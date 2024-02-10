@@ -42,7 +42,7 @@ private:
 public:
     std::vector<std::vector<Cell *>> table;
 
-    void revealZeroAdjacentCells(int r, int c);
+    /*void revealZeroAdjacentCells(int r, int c);*/
     void writePlayer() const {
         std::ofstream outputFile("ScoreTable.txt");
 
@@ -70,7 +70,7 @@ MinesweeperGame(int row_, int col_, int Mines_, const std::string& nume);
 
     void startCell(int r, int c, int ran);
 
-
+    [[nodiscard]] int getRow() const;
 
     //void setName2(const std::string& newName);
 
@@ -81,6 +81,8 @@ MinesweeperGame(int row_, int col_, int Mines_, const std::string& nume);
     //int getScore2();
 
     void afisarePlayer();
+
+    [[nodiscard]] int getCol() const;
 
 };
 

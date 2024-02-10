@@ -64,7 +64,7 @@ void MinesweeperGame::placeMines() {
     }
 }
 
-void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
+/*void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
 
     if (r < 1 || r >= row || c < 1 || c >= col || table[r][c]->Press() || table[r][c]->Mine()) {
 
@@ -72,7 +72,7 @@ void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
     }
 
     table[r][c]->pressCell(*this, r, c);
-    /*if(table[r][c]->nrMine() == 0) {
+    if(table[r][c]->nrMine() == 0) {
         revealZeroAdjacentCells(r+1, c + 1);
         revealZeroAdjacentCells(r, c + 1);
         revealZeroAdjacentCells(r, c - 1);
@@ -82,8 +82,8 @@ void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
         revealZeroAdjacentCells(r + 1, c-1);
         revealZeroAdjacentCells(r -1 , c+1);
     }
-    */
-}
+
+}*/
 
 
 bool MinesweeperGame::pressCell(int r, int c) {
@@ -100,13 +100,15 @@ bool MinesweeperGame::pressCell(int r, int c) {
         a = true;
     } else if (isgameWon()) {
         std::cout << "GAME WON";
-            a = isgameWon();
-        } else
-            revealZeroAdjacentCells(r, c);
-        return a;
+        a = isgameWon();
+    } else {
+        table[r][c]->pressCell(*this, r, c);
+    }
+
+    // revealZeroAdjacentCells(r, c);
+    return a;
 
 }
-
 
 
 std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
@@ -234,6 +236,13 @@ void MinesweeperGame::unflag(int r, int c) {
     table[r][c] = new Cell(false, ismine, nr_mine, true);
 }
 
+int MinesweeperGame::getRow() const {
+    return row;
+}
+
+int MinesweeperGame::getCol() const {
+    return col;
+}
 
 
 

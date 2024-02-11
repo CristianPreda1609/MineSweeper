@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include "Template_Functions.h"
 
 class MinesweeperGame;
 class Cell {

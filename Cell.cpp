@@ -83,11 +83,10 @@ bool Cell::canBeModified() const
 }
 
 void swap(Cell &first, Cell &second) noexcept {
-    using std::swap;
-    std::swap(first.nr_mine, second.nr_mine);
-    std::swap(first.isPressed, second.isPressed);
-    std::swap(first.isMine, second.isMine);
-    std::swap(first.beModified, second.beModified);
+    swapValues(first.nr_mine, second.nr_mine);
+    swapValues(first.isPressed, second.isPressed);
+    swapValues(first.isMine, second.isMine);
+    swapValues(first.beModified, second.beModified);
 }
 
 std::string Cell::returnGamesit() {

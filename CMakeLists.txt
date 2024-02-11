@@ -133,6 +133,10 @@ add_executable(${PROJECT_NAME} main.cpp
         ExceptionTable.h
         CellFactory.cpp
         CellFactory.h
+        Template_Functions.cpp
+        Template_Functions.h
+        Template_Pairs.cpp
+        Template_Pairs.h
 )
 
 ###############################################################################

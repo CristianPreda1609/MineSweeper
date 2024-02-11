@@ -14,7 +14,7 @@ void Player::swap(Player &first, Player &second) noexcept {
     swap(first.score, second.score);
 }
 std::ostream &operator<<(std::ostream &os, const Player &player) {
-    os << "Nume: " << player.name << ", Scor: " << player.score<<"\n";
+    os << player.name << " " << player.score << "\n";
     return os;
 }
 

@@ -8,13 +8,49 @@
 #include <string>
 #include "ExceptionRC.h"
 #include "ExceptionData.h"
+#include <fstream>
+#include "Template_Pairs.h"
+#include "Template_Functions.h"
+#include <algorithm>
 
 #ifdef __linux__
 #include <X11/Xlib.h>
 #endif
 
+template<typename T1, typename T2>
+void sortPairsByScore(std::vector<Template_Pairs<T1, T2>> &pairs) {
+    std::sort(pairs.begin(), pairs.end(),
+              [](const Template_Pairs<T1, T2> &a, const Template_Pairs<T1, T2> &b) {
+                  return findMax(a.getSecond(), b.getSecond()) == a.getSecond();
+              });
+}
 
+template<typename T1, typename T2>
+std::vector<Template_Pairs<T1, T2>> readPairsFromFile(const std::string &filename) {
+    std::vector<Template_Pairs<T1, T2>> pairs;
+
+    std::ifstream inFile(filename);
+    if (inFile.is_open()) {
+        T1 first;
+        T2 second;
+        while (inFile >> first >> second) {
+            pairs.emplace_back(first, second);
+        }
+        inFile.close();
+    } else {
+        std::cerr << "Nu se poate deschide fisierul: " << filename << std::endl;
+    }
+
+    return pairs;
+}
 void startGame() {
+    std::cout << "Tabela de scor : \n";
+    std::vector<Template_Pairs<std::string, int>> readPairs = readPairsFromFile<std::string, int>("ScoreTable.txt");
+    sortPairsByScore(readPairs);
+    for (const auto &pair: readPairs) {
+        std::cout << "Nume: " << pair.getFirst() << ", Scor: " << pair.getSecond() << std::endl;
+    }
+
     std::string nume;
     do {
         std::cout

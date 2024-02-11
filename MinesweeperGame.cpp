@@ -6,6 +6,8 @@
 #include "ResetMineCell.h"
 #include "MineCell.h"
 #include "FlagCell.h"
+#include "CellFactory.h"
+
 
 
 MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, const std::string& nume)
@@ -21,15 +23,15 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
         }
     }
 
-    for (int c = 1; c < col; c++) {
+    for (int c = 0; c < col; c++) {
         delete table[0][c];
-        table[0][c] =  new Cell(false, false, c, true);
+        table[0][c] = new Cell(true, false, c, true);
         if (table[0][c] == nullptr)
             throw ExceptionTable();
     }
-    for (int r = 1; r < row; r++) {
+    for (int r = 0; r < row; r++) {
         delete table[r][0];
-        table[r][0] = new Cell(false, false, r, true);
+        table[r][0] = new Cell(true, false, r, true);
         if (table[r][0] == nullptr)
             throw ExceptionTable();
     }
@@ -38,7 +40,7 @@ MinesweeperGame::MinesweeperGame(const int row_, const int col_, int Mines_, con
 
 
 void MinesweeperGame::placeMines() {
-    int ap = 2;
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> rowDist(1, row - 1 );
@@ -50,40 +52,14 @@ void MinesweeperGame::placeMines() {
         int randomCol = colDist(gen);
 
         if (!table[randomRow][randomCol]->Mine() && table[randomRow][randomCol]->canBeModified()) {
-            if(ap > 0){
+
                 delete table[randomRow][randomCol];
-                table[randomRow][randomCol] = new ResetMineCell();
-                ap--;
-            }else {
-                delete table[randomRow][randomCol];
-                table[randomRow][randomCol] = new MineCell();
-            }
+            table[randomRow][randomCol] = CellFactory::createCell(Mines);
         } else {
             --i;
         }
     }
 }
-
-/*void MinesweeperGame::revealZeroAdjacentCells(int r, int c) {
-
-    if (r < 1 || r >= row || c < 1 || c >= col || table[r][c]->Press() || table[r][c]->Mine()) {
-
-        return;
-    }
-
-    table[r][c]->pressCell(*this, r, c);
-    if(table[r][c]->nrMine() == 0) {
-        revealZeroAdjacentCells(r+1, c + 1);
-        revealZeroAdjacentCells(r, c + 1);
-        revealZeroAdjacentCells(r, c - 1);
-        revealZeroAdjacentCells(r + 1, c);
-        revealZeroAdjacentCells(r - 1, c);
-        revealZeroAdjacentCells(r - 1, c-1);
-        revealZeroAdjacentCells(r + 1, c-1);
-        revealZeroAdjacentCells(r -1 , c+1);
-    }
-
-}*/
 
 
 bool MinesweeperGame::pressCell(int r, int c) {
@@ -114,25 +90,9 @@ bool MinesweeperGame::pressCell(int r, int c) {
 std::ostream &operator<<(std::ostream &os, const MinesweeperGame &game) {
     for (int r = 0; r < game.row; r++) {
         for (int c = 0; c < game.col; c++) {
-            if (r != 0 && c != 0) {
-                if( dynamic_cast<FlagCell*>(game.table[r][c]))
-                {
-
-                    rlutil::setColor(rlutil::RED);
-                      os << "? " ;
-
-                    rlutil::resetColor();
-                    rlutil::setColor(rlutil::WHITE);
-                }else {
-                if (game.table[r][c]->Press()) {
-                    os << game.table[r][c]->nrMine() << " ";
-                } else
-                    os << "? ";
-            }} else
-                os << game.table[r][c]->nrMine() << " ";
-
+            os << *(game.table[r][c]);
         }
-        os << std::endl;
+        os << "\n";
     }
     return os;
 }
@@ -186,13 +146,6 @@ void MinesweeperGame::startCell(int r, int c, int ran) {
     }
 }
 
-/*void MinesweeperGame::setName2(const std::string &newName) {
-    player.setName(newName);
-}*/
-
-/*std::string MinesweeperGame::getName2() const {
-    return player.getName();
-}*/
 
 void MinesweeperGame::afisarePlayer() {
     std::cout<<player;
@@ -244,14 +197,4 @@ int MinesweeperGame::getCol() const {
     return col;
 }
 
-
-
-
-/*int MinesweeperGame::getScore2() {
-    return player.getScore();
-}*/
-
-/*void MinesweeperGame::setScore2(const int scor) {
-    player.setScore(scor);
-}*/
 

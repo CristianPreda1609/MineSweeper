@@ -5,8 +5,7 @@
 #include "MineCell.h"
 #include "MinesweeperGame.h"
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const MineCell &minecell) {
-            os << "*";
-
+    minecell.print();
     return os;
 }
 
@@ -17,17 +16,32 @@ bool MineCell::Press() const {
 }
 
 void MineCell::pressCell(MinesweeperGame &obj, int r, int c) {
-    if (obj.table[r][c]->nrMine() == 0) {
-        obj.table[r + 1][c + 1]->pressCell(obj, r + 1, c + 1);
-        obj.table[r][c + 1]->pressCell(obj, r, c + 1);
-        obj.table[r][c - 1]->pressCell(obj, r, c - 1);
-        obj.table[r + 1][c]->pressCell(obj, r + 1, c);
-        obj.table[r - 1][c]->pressCell(obj, r - 1, c);
-        obj.table[r - 1][c - 1]->pressCell(obj, r - 1, c - 1);
-        obj.table[r + 1][c - 1]->pressCell(obj, r + 1, c - 1);
-        obj.table[r - 1][c + 1]->pressCell(obj, r - 1, c + 1);
+    if (r < 1 || r >= obj.getRow() || c < 1 || c >= obj.getCol() || obj.getCell(r, c)->Press() ||
+        obj.getCell(r, c)->Mine()) {
+
+        return;
     }
     isPressed = true;
+    if (obj.getCell(r, c)->nrMine() == 0) {
+
+        if (r + 1 < obj.getRow() && c + 1 < obj.getCol())
+            obj.getCell(r + 1, c + 1)->pressCell(obj, r + 1, c + 1);
+        if (c + 1 < obj.getCol())
+            obj.getCell(r, c + 1)->pressCell(obj, r, c + 1);
+        if (c - 1 > 0)
+            obj.getCell(r, c - 1)->pressCell(obj, r, c - 1);
+        if (r + 1 < obj.getCol())
+            obj.getCell(r + 1, c)->pressCell(obj, r + 1, c);
+        if (r - 1 > 0)
+            obj.getCell(r - 1, c)->pressCell(obj, r - 1, c);
+        if (r - 1 > 0 && c - 1 > 0)
+            obj.getCell(r - 1, c - 1)->pressCell(obj, r - 1, c - 1);
+        if (r + 1 < obj.getRow() && c - 1 > 0)
+            obj.getCell(r + 1, c - 1)->pressCell(obj, r + 1, c - 1);
+        if (r - 1 > 0 && c + 1 > obj.getCol())
+            obj.getCell(r - 1, c + 1)->pressCell(obj, r - 1, c + 1);
+
+    }
 }
 
 bool MineCell::Mine() const {

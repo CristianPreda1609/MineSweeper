@@ -32,6 +32,8 @@ public:
     std::string returnGamesit() override;
     [[nodiscard]] int returnScore() const override;
 
+    void print() const override;
+
 
 };
 

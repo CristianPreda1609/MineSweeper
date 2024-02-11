@@ -5,14 +5,7 @@
 #include "FlagCell.h"
 #include "MinesweeperGame.h"
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const FlagCell &flagcell) {
-    rlutil::setColor(rlutil::RED);
-
-    os << "?" ;
-
-    rlutil::resetColor();
-    rlutil::setColor(rlutil::WHITE);
-
-
+    flagcell.print();
         return os;
 }
 

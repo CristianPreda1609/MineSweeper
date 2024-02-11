@@ -6,6 +6,7 @@
 #define OOP_CELL_H
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 class MinesweeperGame;
 class Cell {
@@ -48,6 +49,15 @@ public:
     [[nodiscard]] bool canBeModified() const;
 
     [[nodiscard]] virtual int returnScore() const;
+
+    virtual void print() const {
+        if (isPressed) {
+            std::cout << nr_mine << " ";
+
+        } else {
+            std::cout << "? ";
+        }
+    }
 
 
 

@@ -39,10 +39,10 @@ private:
 
     void isCell0 ();
 
-public:
     std::vector<std::vector<Cell *>> table;
+public:
 
-    /*void revealZeroAdjacentCells(int r, int c);*/
+
     void writePlayer() const {
         std::ofstream outputFile("ScoreTable.txt");
 
@@ -72,17 +72,12 @@ MinesweeperGame(int row_, int col_, int Mines_, const std::string& nume);
 
     [[nodiscard]] int getRow() const;
 
-    //void setName2(const std::string& newName);
-
-    //[[nodiscard]] std::string getName2() const;
-
-    //void setScore2(const int scor);
-
-    //int getScore2();
 
     void afisarePlayer();
 
     [[nodiscard]] int getCol() const;
+
+    Cell *getCell(int r, int c) { return table[r][c]; }
 
 };
 

@@ -8,8 +8,7 @@
 std::random_device ResetMineCell::rd;
 std::mt19937 ResetMineCell::gen(ResetMineCell::rd());
 std::ostream &operator<<(std::ostream &os, [[maybe_unused]] const ResetMineCell &minecell) {
-    os << "*";
-
+    minecell.print();
     return os;
 }
 
@@ -20,18 +19,32 @@ bool ResetMineCell::Press() const {
 }
 
 void ResetMineCell::pressCell(MinesweeperGame &obj, int r, int c) {
-    if (obj.table[r][c]->nrMine() == 0) {
-        obj.table[r + 1][c + 1]->pressCell(obj, r + 1, c + 1);
-        obj.table[r][c + 1]->pressCell(obj, r, c + 1);
-        obj.table[r][c - 1]->pressCell(obj, r, c - 1);
-        obj.table[r + 1][c]->pressCell(obj, r + 1, c);
-        obj.table[r - 1][c]->pressCell(obj, r - 1, c);
-        obj.table[r - 1][c - 1]->pressCell(obj, r - 1, c - 1);
-        obj.table[r + 1][c - 1]->pressCell(obj, r + 1, c - 1);
-        obj.table[r - 1][c + 1]->pressCell(obj, r - 1, c + 1);
+    if (r < 1 || r >= obj.getRow() || c < 1 || c >= obj.getCol() || obj.getCell(r, c)->Press() ||
+        obj.getCell(r, c)->Mine()) {
+
+        return;
     }
     isPressed = true;
+    if (obj.getCell(r, c)->nrMine() == 0) {
 
+        if (r + 1 < obj.getRow() && c + 1 < obj.getCol())
+            obj.getCell(r + 1, c + 1)->pressCell(obj, r + 1, c + 1);
+        if (c + 1 < obj.getCol())
+            obj.getCell(r, c + 1)->pressCell(obj, r, c + 1);
+        if (c - 1 > 0)
+            obj.getCell(r, c - 1)->pressCell(obj, r, c - 1);
+        if (r + 1 < obj.getCol())
+            obj.getCell(r + 1, c)->pressCell(obj, r + 1, c);
+        if (r - 1 > 0)
+            obj.getCell(r - 1, c)->pressCell(obj, r - 1, c);
+        if (r - 1 > 0 && c - 1 > 0)
+            obj.getCell(r - 1, c - 1)->pressCell(obj, r - 1, c - 1);
+        if (r + 1 < obj.getRow() && c - 1 > 0)
+            obj.getCell(r + 1, c - 1)->pressCell(obj, r + 1, c - 1);
+        if (r - 1 > 0 && c + 1 > obj.getCol())
+            obj.getCell(r - 1, c + 1)->pressCell(obj, r - 1, c + 1);
+
+    }
 }
 
 bool ResetMineCell::Mine() const {
@@ -88,4 +101,11 @@ int ResetMineCell::returnScore() const {
         std::uniform_int_distribution<int> rand(101, 9999 );
         return rand(gen);
     }
+}
+
+void ResetMineCell::print() const {
+    if (isPressed)
+        std::cout << nr_mine << " ";
+
+    else std::cout << "? ";
 }

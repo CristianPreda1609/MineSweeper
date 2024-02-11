@@ -131,6 +131,8 @@ add_executable(${PROJECT_NAME} main.cpp
         ExceptionData.cpp
         ExceptionData.h
         ExceptionTable.h
+        CellFactory.cpp
+        CellFactory.h
 )
 
 ###############################################################################

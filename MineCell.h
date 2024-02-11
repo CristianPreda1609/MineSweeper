@@ -6,6 +6,7 @@
 #define OOP_MINECELL_H
 #include "Cell.h"
 
+
 class MineCell : public Cell{
 private:
     bool isPressed, isMine{};
@@ -27,6 +28,11 @@ public:
     std::string returnGamesit() override;
     [[nodiscard]] int returnScore() const override;
 
+    void print() const override {
+        if (isPressed)
+            std::cout << "* ";
+        else std::cout << "? ";
+    }
 };
 
 

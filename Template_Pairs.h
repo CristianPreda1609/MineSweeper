@@ -13,7 +13,7 @@ private:
     T2 second;
 
 public:
-    Template_Pairs(const T1 f, const T2 s) : first(f), second(s) {}
+    Template_Pairs(const T1 &f, const T2 &s) : first(f), second(s) {}
 
     T1 getFirst() const {
         return first;
